@@ -5,7 +5,8 @@ rm(r)
 
 options(
   stringsAsFactors = FALSE,
-  prompt = "R > "
+  prompt = "R > ",
+  width = 120
 )
 options(warnPartialMatchDollar = TRUE)
 

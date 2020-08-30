@@ -14,6 +14,7 @@ set nofoldenable
 set mouse=a
 set laststatus=2
 set statusline+=%F
+set clipboard=unnamed
 
 " colors
 colorscheme gruvbox
@@ -22,8 +23,6 @@ set background=dark
 
 " hotkeys
 map <C-n> :NERDTreeToggle<CR>
-map <C-a> :"*y<CR>
-map <C-S-a> :%y+<CR>
 nnoremap j gj
 nnoremap k gk
 nnoremap L gt
