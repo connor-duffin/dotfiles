@@ -102,6 +102,8 @@ alias tmux='tmux -2'
 export VISUAL=vi
 export EDITOR=vi
 
+export WORKON_HOME="/Users/connor/.miniconda3/envs"
+
 # update the path
 path+=('/Users/connor/.scripts')
 export PATH
