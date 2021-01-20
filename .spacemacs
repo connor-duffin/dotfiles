@@ -353,6 +353,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq c-basic-offset 4)
   (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
 
+  ;; auto-insert from template
+  (auto-insert-mode)
+  (setq auto-insert-directory "/Users/connor/Documents/LaTeX/")
+  (setq auto-insert-query nil)
+  (define-auto-insert "\\.tex" "template.tex")
+
   ;; python flychecking
   (setq flycheck-python-flake8-executable "flake8")
 )
