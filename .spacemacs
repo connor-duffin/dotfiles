@@ -39,7 +39,11 @@ values."
      emacs-lisp
      ess
      latex
-     python
+     (python :variables
+             python-backend 'anaconda
+             python-test-runner 'pytest
+             python-formatter 'yapf)
+     (conda :variables conda-anaconda-home "~/.miniconda3")
      scheme
      ;; others
      helm
@@ -53,9 +57,9 @@ values."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; no {syntax,spell}-checking
+     ;; no spell-checking
      (spell-checking :variables spell-checking-enable-by-default nil)
-     (syntax-checking :variables syntax-checking-enable-by-default nil)
+     syntax-checking
      auto-completion
      )
    ;; List of additional packages that will be installed without being
@@ -313,7 +317,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setenv "WORKON_HOME" "/Users/connor/.miniconda3/envs")
   )
 
 (defun dotspacemacs/user-config ()
@@ -323,19 +326,32 @@ before packages are loaded. If you are unsure, you should try in setting them in
   This is the place where most of your configurations should be done. Unless it is
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
+  ;; proper environments
+  (setenv "WORKON_HOME" "/Users/connor/.miniconda3/envs")
+
   ;; org stuff
   (setq org-agenda-files '("~/Documents/Org"))
+
+
   ;; latex previews in org-mode
   (setq org-latex-create-formula-image-program 'imagemagick)
+
   ;; Rmarkdown settings
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-  (setq c-basic-offset 4)
-  (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
+
   ;; use ranger as fm
   (setq ranger-enter-with-minus t)
-  ;; set default width, height
+
+  ;; aesthetics
+  ;; (global-visual-line-mode t)
+  ;; (global-visual-fill-column-mode t)
   (setq default-frame-alist '((width . 120) (height . 55)))
+  (setq c-basic-offset 4)
+  (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
+
+  ;; python flychecking
+  (setq flycheck-python-flake8-executable "flake8")
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
