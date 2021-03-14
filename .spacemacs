@@ -328,6 +328,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; proper environments
   (setenv "WORKON_HOME" "/Users/connor/.miniconda3/envs")
 
+  ;; auto-insert from template
+  (auto-insert-mode)
+  (setq auto-insert-directory "/Users/connor/Documents/LaTeX/")
+  (setq auto-insert-query nil)
+  (define-auto-insert "\.tex" "template.tex")
+  (define-auto-insert "\.Rmd" "template.Rmd")
+
   ;; org stuff
   (with-eval-after-load 'org
     ;; here goes your Org config :)
@@ -335,7 +342,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq org-agenda-files '("~/Documents/Org/research.org"
                              "~/Documents/Org/meetings.org"
                              "~/Documents/Org/personal.org"))
-    (setq org-agenda-entry-text-mode t)
+    (setq org-agenda-entry-text-mode 't)
+    (setq org-agenda-entry-text-maxlines 40)
 
     ;; org-capture
     (global-set-key (kbd "<f12>") 'org-capture)
@@ -345,7 +353,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;; latex previews in org-mode
     (setq org-latex-create-formula-image-program 'imagemagick)
-
     )
   ;; Rmarkdown settings
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
@@ -364,12 +371,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq default-frame-alist '((width . 120) (height . 55)))
   (setq c-basic-offset 4)
   (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
-
-  ;; auto-insert from template
-  (auto-insert-mode)
-  (setq auto-insert-directory "/Users/connor/Documents/LaTeX/")
-  (setq auto-insert-query nil)
-  (define-auto-insert "\\.tex" "template.tex")
 
   ;; python flychecking
   (setq flycheck-python-flake8-executable "flake8")
