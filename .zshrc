@@ -99,6 +99,9 @@ source $ZSH/oh-my-zsh.sh
 alias R='R --quiet --no-save'
 alias tmux='tmux -2'
 
+HISTSIZE=100000000
+SAVEHIST=$HISTSIZE
+
 export VISUAL=vi
 export EDITOR=vi
 
