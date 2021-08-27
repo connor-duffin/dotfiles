@@ -39,6 +39,8 @@ values."
      emacs-lisp
      ess
      latex
+     (c-c++ :variables
+            c-c++-backend 'lsp-clangd)
      (python :variables
              python-backend 'anaconda
              python-test-runner 'pytest
