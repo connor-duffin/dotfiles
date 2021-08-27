@@ -349,6 +349,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                              "~/Documents/Org/life.org_archive"))
     (setq org-agenda-entry-text-mode 't)
     (setq org-agenda-entry-text-maxlines 40)
+    (setq org-agenda-start-on-weekday 0)
 
     ;; org-babel indents are OK
     (setq org-src-preserve-indentation t)
@@ -359,7 +360,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;; latex previews in org-mode
     (setq org-latex-create-formula-image-program 'imagemagick)
+
+    ;; habit-tracking
+    (add-to-list 'org-modules 'org-habit t)
+    ;; (setq org-habit-show-all-today t)
     )
+
+
   ;; Rmarkdown settings
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
