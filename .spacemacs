@@ -333,12 +333,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; proper environments
   (setenv "WORKON_HOME" "/Users/connor/miniconda3/envs")
 
+  ;; latex stuff
   ;; auto-insert from template
   (auto-insert-mode)
   (setq auto-insert-directory "/Users/connor/Documents/LaTeX/")
   (setq auto-insert-query nil)
   (define-auto-insert "\.tex" "template.tex")
   (define-auto-insert "\.Rmd" "template.Rmd")
+
+  ;; rmd stuff
+  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
   ;; org stuff
   (with-eval-after-load 'org
@@ -365,11 +370,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (add-to-list 'org-modules 'org-habit t)
     ;; (setq org-habit-show-all-today t)
     )
-
-
-  ;; Rmarkdown settings
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
   ;; use ranger as fm
   (setq ranger-show-preview t
@@ -419,6 +419,20 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; python flychecking
   (setq flycheck-python-flake8-executable "flake8")
   (setq flycheck-python-pylint-executable "python3")
+
+  ;; remote sync of current directory
+  (defun save-sync-remote ()
+    "Travel up the path until .sync is found"
+    (interactive)
+    (with-temp-buffer
+      (while (and (not (file-exists-p ".sync"))
+                  (not (equal "/" default-directory)))
+        (cd ".."))
+      (when (file-exists-p ".sync")
+        (save-window-excursion (async-shell-command "./.sync"))
+        )))
+
+  (global-set-key (kbd "C-$") 'save-sync-remote)
 )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -453,7 +467,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files
    '("/Users/connor/Documents/Org/research.org" "/Users/connor/Documents/Org/meetings.org" "/Users/connor/Documents/Org/life.org"))
  '(package-selected-packages
-   '(tern yaml-mode xterm-color web-beautify shell-pop poly-R poly-noweb poly-markdown polymode org-projectile org-category-capture org-present livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc geiser coffee-mode ess-smart-equals ess-R-data-view ctable ess julia-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary helm-company helm-c-yasnippet fuzzy company-statistics company-auctex company-anaconda company auto-yasnippet yasnippet ac-ispell auto-complete auctex-latexmk auctex smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit git-commit with-editor transient org-pomodoro alert log4e gntp org-mime org-download multi-term htmlize gnuplot eshell-z eshell-prompt-extras esh-help yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+   '(yasnippet-snippets vterm treemacs-magit symbol-overlay robe inspector info+ helm-ls-git gendoxy forge evil-collection dap-mode csv-mode lsp-mode treemacs yaml-mode xterm-color web-beautify shell-pop poly-R poly-noweb poly-markdown polymode org-projectile org-category-capture org-present livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc geiser coffee-mode ess-smart-equals ess-R-data-view ctable ess julia-mode flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck auto-dictionary helm-company helm-c-yasnippet fuzzy company-statistics company-auctex company-anaconda company auto-yasnippet yasnippet ac-ispell auto-complete auctex-latexmk auctex smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit git-commit with-editor transient org-pomodoro alert log4e gntp org-mime org-download multi-term htmlize gnuplot eshell-z eshell-prompt-extras esh-help yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
