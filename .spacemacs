@@ -383,9 +383,35 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; (global-visual-fill-column-mode t)
   (setq default-frame-alist '((width . 120) (height . 55)))
 
-  ;; automatically resize `selected-frame'
-  ;; (set-frame-size (selected-frame) 200 55)
-  ;; (set-frame-size (selected-frame) 120 55)
+  (defun smallframe ()
+    (interactive)
+    (set-frame-size (selected-frame) 120 65)
+    (set-frame-position (selected-frame) 900 50)
+    )
+
+  (defun bigframe ()
+    (interactive)
+    (set-frame-size (selected-frame) 200 65)
+    (set-frame-position (selected-frame) 200 50)
+    )
+
+  (defun smallframe-laptop ()
+    (interactive)
+    (set-frame-size (selected-frame) 120 55)
+    (set-frame-position (selected-frame) 675 50)
+    )
+
+  (defun bigframe-laptop ()
+    (interactive)
+    (set-frame-size (selected-frame) 195 55)
+    (set-frame-position (selected-frame) 75 50)
+    )
+
+  (global-set-key (kbd "C-{") 'smallframe)
+  (global-set-key (kbd "C-}") 'bigframe)
+
+  (global-set-key (kbd "C-M-{") 'smallframe-laptop)
+  (global-set-key (kbd "C-M-}") 'bigframe-laptop)
 
   (setq c-basic-offset 4)
   (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
