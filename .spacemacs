@@ -334,12 +334,24 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setenv "WORKON_HOME" "/Users/connor/miniconda3/envs")
 
   ;; latex stuff
+  (setq latex-base-directory "/Users/connor/Documents/LaTeX/")
+
   ;; auto-insert from template
   (auto-insert-mode)
-  (setq auto-insert-directory "/Users/connor/Documents/LaTeX/")
+  (setq auto-insert-directory latex-base-directory)
   (setq auto-insert-query nil)
   (define-auto-insert "\.tex" "template.tex")
   (define-auto-insert "\.Rmd" "template.Rmd")
+
+  ;; pull in updates to macros and bibliography'
+  (defun update-tex ()
+    (interactive)
+    (copy-file (concat latex-base-directory "macros.tex")
+               (concat (magit-toplevel) "macros.tex"))
+
+    (copy-file (concat latex-base-directory "master.bib")
+               (concat (magit-toplevel) "bibliography.bib"))
+    )
 
   ;; rmd stuff
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
