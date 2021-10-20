@@ -391,8 +391,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
         ranger-cleanup-on-disable t)
 
   ;; aesthetics
-  ;; (global-visual-line-mode t)
-  ;; (global-visual-fill-column-mode t)
   (setq default-frame-alist '((width . 120) (height . 55)))
 
   (defun smallframe ()
@@ -433,8 +431,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq flycheck-python-pylint-executable "python3")
 
   ;; remote sync of current directory
-  (defun save-sync-remote ()
-    "Travel up the path until .sync is found"
+  (defun sync-remote ()
+    "Travel up the path until .sync is found, upon which, run .sync."
     (interactive)
     (with-temp-buffer
       (while (and (not (file-exists-p ".sync"))
@@ -444,8 +442,37 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (save-window-excursion (async-shell-command "./.sync"))
         )))
 
-  (global-set-key (kbd "C-$") 'save-sync-remote)
-)
+  (global-set-key (kbd "C-$") 'sync-remote)
+
+  ;; create a project directory
+  ;; automatically initializes git repo, and includes a .sync script
+  (defun setup-projdir ()
+    (interactive)
+    (setq project-dir (read-directory-name "New project directory: "))
+    (setq remote-dir (concat
+                      "cambox:projects/"
+                      (file-name-nondirectory (directory-file-name project-dir)) "/"))
+
+    (mkdir project-dir)
+    (magit-init projdir)
+
+    ;; create rsync command
+    (setq rsync
+          (mapconcat 'identity
+                     (list "rsync -av --progress"
+                           "--exclude .git"
+                           "--exclude .DS_Store"
+                           project-dir
+                           remote-dir)
+                     " ")
+          )
+
+    ;; copy rsync command to file .sync
+    (setq syncfile (concat project-dir ".sync"))
+    (write-region rsync nil syncfile)
+    (set-file-modes syncfile #o755)
+    )
+  )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
