@@ -71,35 +71,11 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias R='R --quiet --no-save'
-alias tmux='tmux -2'
-alias gppl='g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20'
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# connor added stuff
+alias R="R --quiet --no-save"
+alias tmux="tmux -2"
+alias gppl="g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20"
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
@@ -108,10 +84,6 @@ export VISUAL=vi
 export EDITOR=vi
 
 export WORKON_HOME="/Users/connor/.miniconda3/envs"
-
-# update the path
-path+=('/Users/connor/.scripts')
-export PATH
 
 # vi mode
 bindkey -v
@@ -133,7 +105,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# path updates
+export PATH="/Users/connor/.scripts:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
-
