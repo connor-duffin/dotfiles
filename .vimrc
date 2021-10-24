@@ -47,7 +47,7 @@ set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
 set guioptions-=r  "scrollbar
 
-" all my plugins 
+" all my plugins
 call plug#begin('~/.vim/plugged') " dir = ~/.vim/plugged
 Plug 'lervag/vimtex'
 Plug 'tpope/vim-surround'
