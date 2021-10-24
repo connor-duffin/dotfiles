@@ -99,6 +99,7 @@ source $ZSH/oh-my-zsh.sh
 alias R='R --quiet --no-save'
 alias tmux='tmux -2'
 alias gppl='g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
@@ -135,3 +136,4 @@ unset __conda_setup
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+

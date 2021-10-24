@@ -347,10 +347,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (defun update-tex ()
     (interactive)
     (copy-file (concat latex-base-directory "macros.tex")
-               (concat (magit-toplevel) "macros.tex"))
+               (concat (magit-toplevel) "macros.tex") t)
 
     (copy-file (concat latex-base-directory "master.bib")
-               (concat (magit-toplevel) "bibliography.bib"))
+               (concat (magit-toplevel) "bibliography.bib") t)
     )
 
   ;; rmd stuff

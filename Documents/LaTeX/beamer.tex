@@ -1,41 +1,279 @@
 \documentclass[aspectratio=1610]{beamer}
 
 \usetheme{default}
-\usecolortheme{orchid}
+\usecolortheme{seahorse}
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+% \definecolor{alert}{HTML}{B16286}
+% \definecolor{highlight}{HTML}{458588}
+% \definecolor{gruvbox_light}{HTML}{F9F5D7}
+% \definecolor{gruvbox_dark}{HTML}{3C3836}
+
+% \usecolortheme[named=highlight]{structure}
+% \setbeamercolor{normal text}{fg=gruvbox_dark}
+% \setbeamercolor{alerted text}{fg=alert}
+
 \beamertemplatenavigationsymbolsempty
 \setbeamertemplate{footline}[frame number]
 
 \setbeamercovered{transparent}
 
+\titlegraphic{
+  \begin{center}
+    \includegraphics[width=4cm]{figures/uoc}
+    \quad
+    \includegraphics[width=3cm]{figures/uwa}
+  \end{center}
+}
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage[round]{natbib}
-\useinnertheme{rectangles}
 
-\title{title}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% no figure prefixes
+\captionsetup[figure]{labelformat=empty,labelsep=none}
+\captionsetup[subfigure]{labelformat=empty,labelsep=none}
+
+% matplotlib colors
+\definecolor{tab_blue}{HTML}{1F77B4}
+\definecolor{tab_orange}{HTML}{FF7F0E}
+\definecolor{tab_green}{HTML}{2CA02C}
+\definecolor{tab_gray}{HTML}{7F7F7F}
+
+\usepackage[maxnames=6]{biblatex}
+\addbibresource{{bibliography.bib}}
+
+\usepackage{tikz}
+
+\newcommand{\dee}{\mathrm{d}}
+\newcommand{\E}{\mathsf{E}}
+\newcommand{\bm}{\boldsymbol}
+\newcommand{\mb}{\mathbf}
+\newcommand{\given}{\:\vert\:}
+
+\title{Statistical Finite Elements for Nonlinear PDEs}
 \author{Connor Duffin}
-\institute[University of Western Australia]{
+\institute[both]{
+  Research Assistant\\
+  Department of Engineering\\
+  University of Cambridge\\
+  {\tiny \textit{and}} \\
+  PhD Student\\
   Department of Mathematics and Statistics\\
   University of Western Australia
+
 }
 
-\date
+\date{MMLDT 2021, 28 September 2021}
 
 \begin{document}
-\maketitle
+
+\frame{\titlepage}
 
 \begin{frame}
-  \frametitle{test}
-  Sample text here.
+  \frametitle{Coauthors/reference}
+
+  \begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.2\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{images/ed.jpg}
+      \caption{\centering Ed Cripps\\ (UWA)}
+    \end{subfigure}
+    ~~~
+    \begin{subfigure}[b]{0.215\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{images/stemler}
+      \caption{\centering Thomas Stemler\\ (UWA)}
+    \end{subfigure}
+    ~~~
+    \begin{subfigure}[b]{0.2\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{images/mark}
+      \caption{\centering Mark Girolami\\ (Cambridge)}
+    \end{subfigure}
+  \end{figure}
+  
+  \begin{center}
+    \fullcite{duffinStatisticalFiniteElements2021}
+  \end{center}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Thank you!}
-%   References:
-%   \bibliographystyle{plainnat}
-%   \bibliography{/home/connor/Documents/LaTeX/master.bib}
-% \end{frame}
+\begin{frame}
+  \frametitle{Background}
+  In this work we are interested an internal wave model \alert{(KdV equation)}
+  \[
+    \partial_t u + \alpha u u_x + \beta u_{xxx} + c u_x = 0
+  \]
+  with observed data $y_{1:n} = (y_1, \ldots, y_n)$, with PDE parameters $\Lambda = (\alpha,
+  \beta, c)$.
+
+  \begin{itemize}
+  \item How to use data to \alert{correct for model mismatch?}
+  \item Inverse problem: $p(\Lambda \given y_{1:n})$, where the PDE solution $u
+    := u(\Lambda)$, \alert{well-studied}.
+  \item What if, instead, we look at $p(u^n \given y_{1:n}, \Lambda)$
+  \item \alert{How to construct this?}
+  \end{itemize}
+  \pause
+  The \alert{statistical finite element method} (statFEM) is one way.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Underlying dynamical process}
+  \begin{itemize}
+  \item Use \alert{stochastic dynamics}. Take the KdV equation:
+    \[
+      \partial_t u + \alpha u u_x + \beta u_{xxx} + c u_x = \xi_\theta,
+    \]
+    we have $u := u(x, t)$, $x \in \Omega$, $t \in [0, T]$.
+  \item Model \alert{uncertainty} with a Gaussian process,
+    \[
+      \xi_\theta(x, t) \sim \mathcal{GP}(0, \delta(t - t') \cdot k_\theta(x, x')),
+      \quad k_\theta(x, x') = \rho^2 \exp(-\lVert x - x' \rVert^2 / (2\ell^2)).
+    \]
+  \end{itemize}
+  \begin{columns}
+    \column{0.65\textwidth} 
+    In practise we need to \alert{discretize}: we use \alert{FEM.}
+    \begin{itemize}
+    \item Construct a mesh, $\Omega_h$, with mesh-size $h$: \alert{discrete
+        approximation} to $\Omega$.
+    \item Use finite elements on the mesh $\Omega_h$, $u(x, n
+      \Delta_t)$ $\approx \sum_{i = 1}^{n_u} u_i \phi_i(x)$.
+    \item \alert{Hat-functions} $\implies \phi_i(x_j) = \delta_{ij}$.
+    \item \alert{FEM coefficients} $(u_1(t), \ldots, u_{n_u}(t)) \in \mathbb{R}^{n_u}$.
+    \end{itemize}
+    \column{0.3\textwidth}
+    \begin{figure}[t]
+      \centering
+      \includegraphics[width=\textwidth]{figures/fem-illustrated}
+      \caption{FEM \footnotesize{(from Bakka, H. (2019),
+          arXiv:1803.03765)}.}
+    \end{figure}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Underlying dynamical process}
+  \begin{itemize}
+  \item Multiply by testing function $\phi_j$, and integrate over $\Omega_h$:
+    \[
+      \langle \partial_t u_h, \phi_j \rangle
+      + \langle \alpha u_h u_{h, x}, \phi_j \rangle
+      - \langle \beta u_{h, xx}, \phi_j \rangle
+      + \langle c u_{h, x}, \phi_j \rangle = \langle \xi_\theta, \phi_j \rangle, \; j
+      = 1, \ldots, n_u.
+    \]
+    \alert{Removes} higher-order differentiability, so we have \alert{weak
+      solutions.} Note: $\langle f, g \rangle = \int_\Omega f \, g \, \mathrm{d} x$.
+  \item Time discretization: use \alert{Crank-Nicolson} for stability. Write
+    $u^n = (u_1(n\Delta_t), \ldots, u_{n_u}(\Delta_t)) \in \mathbb{R}^{n_u}$.
+  \item For the \alert{FEM coefficients} we have a Markov process:
+    \[
+      \mathcal{M}(u^n, u^{n - 1}) = e_\theta^n, \quad e_\theta^n \sim
+      \mathcal{N}(0, \Delta_t G_\theta),
+    \]
+    for $G_{\theta, ij} = \langle \phi_i, \langle k_\theta(\cdot, \cdot), \phi_j \rangle \rangle$.
+  \end{itemize}
+  \vspace{0.5cm}
+  \pause
+  
+  How to coherently incorporate data with this (implicit) prior distribution? 
+\end{frame}
+
+
+\begin{frame}
+  \begin{block}{{\Large Model-data synthesis}}
+    With data $y_n \in \mathbb{R}^{n_y}$, we write $y_n = H u^n + \eta_n$.
+    \begin{itemize}
+    \item \alert{Observation operator} $H : \mathbb{R}^{n_u} \to \mathbb{R}^{n_y}$.
+    \item \alert{Noisy measurements} $\eta_n \sim \mathcal{N}(0, \sigma_n^2 I)$.
+    \end{itemize}
+    And this gives the state-space model
+    \begin{align*}
+      \mathcal{M}(u^n, u^{n - 1}) = e_\theta^n ,
+      \quad e_\theta^n \sim \mathcal{N}(0, \Delta_t G_\theta),
+      \quad &\text{(Dynamics)} \\
+      y_n = H u^n + \eta_n ,
+      \quad \eta_n \sim \mathcal{N}(0, \sigma_n^2 I).
+      \quad &\text{(Data)}
+    \end{align*}
+    Compute the posterior $p(u^n \given y_{1:n}, \Lambda, \theta)$ using
+    nonlinear filtering methods: \alert{ensemble Kalman filter \footfullcite{evensenEnsembleKalmanFilter2003}.}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Case study: internal waves in a tub}
+  Apply statFEM methodology to measurements of internal waves $u^n$ at $3$
+  locations, observing data each of the $n_t = 1001$ timesteps for $t \in [0, 300]$ s.
+
+  \begin{columns}
+    \column{0.4\linewidth}
+    \begin{figure}[t]
+      \centering \newcommand{\twidth}{6cm} \newcommand{\theight}{1.5cm}
+      \begin{tikzpicture}
+        \coordinate [] (A) at (0, 0); \coordinate [] (B) at (0, \theight);
+        \coordinate [] (C) at (-\twidth, 0); \coordinate [] (D) at (-\twidth,
+        \theight);
+
+        \coordinate [label=WG3] (z) at (-0.25 * \twidth, \theight); \coordinate
+        [label=WG2] (y) at (-0.5 * \twidth, \theight); \coordinate [label=WG1]
+        (x) at (-0.75 * \twidth, \theight);
+
+        \draw [gray, dashed] (-0.85 * \twidth, 0.25 * \theight) node[black,
+        right] {\footnotesize{$\vartheta^\circ$}} -- (-\twidth, 0.25 *
+        \theight); \draw [gray, very thick] (-\twidth, 0.25 * \theight) -- (0,
+        0.75 * \theight); \draw [gray, dashed] (x) -- (-0.75 * \twidth, 0);
+        \draw [gray, dashed] (y) -- (-0.50 * \twidth, 0); \draw [gray, dashed]
+        (z) -- (-0.25 * \twidth, 0); \draw [very thick] (A) -- (C) -- (D) -- (B)
+        -- (A);
+
+        \draw [<->] (-\twidth, -0.25) -- node[below] {$L$} (0, -0.25); \draw
+        [<->] (-6.25, 0) -- node[left] {$H$} (-6.25, \theight);
+
+        \draw [<->] (-0.52 * \twidth, 0) -- node[left] {$h_2$} (-0.52 * \twidth,
+        0.50 * \theight); \draw [<->] (-0.52 * \twidth, 0.50 * \theight) --
+        node[left] {$h_1$} (-0.52 * \twidth, \theight);
+      \end{tikzpicture}
+      \caption{ Wave gauges WG1, WG2, WG3 capture observations of internal wave
+        amplitude. Initial conditions are shown as a grey line, labelled with
+        initial angle $\vartheta^\circ$. }
+    \end{figure}
+
+    \column{0.45\linewidth}
+    \begin{figure}[t]
+      \centering \includegraphics[width=\textwidth]{figures/raw-processed-data}
+      \caption{Experimental data at WG1, WG2, WG3, up to time $t = 300$s.}
+      \label{fig:expdata-setup}
+    \end{figure}
+  \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Results}
+  \begin{figure}[t]
+    \centering \includegraphics[width=0.8\textwidth]{figures/expdata-posterior}
+    \caption{StatFEM posterior measure
+      $p(u^n \given y_{1:n}, \Lambda, \theta)$ for the KdV equation.
+      (A): posterior at WG locations; (B): posterior wave profile $u$ for
+      $t = \{75, 150, 225\}$ s.}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{References}
+  \printbibliography[heading=none]
+\end{frame}
 
 \end{document}
