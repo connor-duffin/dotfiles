@@ -9,7 +9,7 @@ PS1=" \[\033[01;34m\]\w\[\033[00m\] >> "
 
 HISTSIZE=-1
 
-# separate configurations across multiple machines
+# conda configurations across multiple machines
 if [ $HOSTNAME == "csic40" ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.miniconda3/lib"
 
@@ -31,6 +31,10 @@ if [ $HOSTNAME == "csic40" ]; then
     fi
     unset __conda_setup
     # <<< conda initialize <<<
+
+    # cuda setup
+    export PATH=/usr/local/cuda-11.2/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 else
     if [ $HOSTNAME == "Connors-MacBook-Air.local"]; then
         # >>> conda initialize >>>
