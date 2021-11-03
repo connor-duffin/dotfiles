@@ -454,7 +454,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                       (file-name-nondirectory (directory-file-name project-dir)) "/"))
 
     (mkdir project-dir)
-    (magit-init projdir)
+    (magit-init project-dir)
 
     ;; create rsync command
     (setq rsync
