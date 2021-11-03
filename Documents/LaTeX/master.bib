@@ -164,7 +164,6 @@
   primaryclass = {cs, math, stat},
   abstract = {The recent statistical finite element method (statFEM) provides a coherent statistical framework to synthesise finite element models with observed data. Through embedding uncertainty inside of the governing equations, finite element solutions are updated to give a posterior distribution which quantifies all sources of uncertainty associated with the model. However to incorporate all sources of uncertainty, one must integrate over the uncertainty associated with the model parameters, the known forward problem of uncertainty quantification. In this paper, we make use of Langevin dynamics to solve the statFEM forward problem, studying the utility of the unadjusted Langevin algorithm (ULA), a Metropolis-free Markov chain Monte Carlo sampler, to build a sample-based characterisation of this otherwise intractable measure. Due to the structure of the statFEM problem, these methods are able to solve the forward problem without explicit full PDE solves, requiring only sparse matrix-vector products. ULA is also gradient-based, and hence provides a scalable approach up to high degrees-of-freedom. Leveraging the theory behind Langevin-based samplers, we provide theoretical guarantees on sampler performance, demonstrating convergence, for both the prior and posterior, in the Kullback-Leibler divergence, and, in Wasserstein-2, with further results on the effect of preconditioning. Numerical experiments are also provided, for both the prior and posterior, to demonstrate the efficacy of the sampler, with a Python package also included.},
   archiveprefix = {arXiv},
-  copyright = {All rights reserved},
   keywords = {Mathematics - Numerical Analysis,Statistics - Computation,Statistics - Machine Learning},
   file = {/Users/connor/Zotero/storage/VJBPDWSZ/Akyildiz et al. - 2021 - Statistical Finite Elements via Langevin Dynamics.pdf;/Users/connor/Zotero/storage/52XKKPMY/2110.html}
 }
@@ -1174,6 +1173,25 @@
   file = {/Users/connor/Zotero/storage/5ZRYCRGG/Briol et al. - 2019 - Contributed Discussion of A Bayesian Conjugate Gr.pdf}
 }
 
+@article{brocker2007scoring,
+  title = {Scoring {{Probabilistic Forecasts}}: The {{Importance}} of {{Being Proper}}},
+  shorttitle = {Scoring {{Probabilistic Forecasts}}},
+  author = {Br{\"o}cker, Jochen and Smith, Leonard A.},
+  year = {2007},
+  month = apr,
+  journal = {Weather and Forecasting},
+  volume = {22},
+  number = {2},
+  pages = {382--388},
+  publisher = {{American Meteorological Society}},
+  issn = {1520-0434, 0882-8156},
+  doi = {10.1175/WAF966.1},
+  abstract = {{$<$}section class="abstract"{$><$}h2 class="abstractTitle text-title my-1" id="d3026762e66"{$>$}Abstract{$<$}/h2{$><$}p{$>$}Questions remain regarding how the skill of operational probabilistic forecasts is most usefully evaluated or compared, even though probability forecasts have been a long-standing aim in meteorological forecasting. This paper explains the importance of employing proper scores when selecting between the various measures of forecast skill. It is demonstrated that only proper scores provide internally consistent evaluations of probability forecasts, justifying the focus on proper scores independent of any attempt to influence the behavior of a forecaster. Another property of scores (i.e., locality) is discussed. Several scores are examined in this light. There is, effectively, only one proper, local score for probability forecasts of a continuous variable. It is also noted that operational needs of weather forecasts suggest that the current concept of a score may be too narrow; a possible generalization is motivated and discussed in the context of propriety and locality.{$<$}/p{$><$}/section{$>$}},
+  chapter = {Weather and Forecasting},
+  langid = {english},
+  file = {/Users/connor/Zotero/storage/KBJ46QR3/Bröcker and Smith - 2007 - Scoring Probabilistic Forecasts The Importance of.pdf;/Users/connor/Zotero/storage/7USKLRS6/waf966_1.html}
+}
+
 @article{brunk1980bayesian,
   ids = {brunkBayesianLeastSquares1980a},
   title = {Bayesian Least Squares Estimates of Univariate Regression Functions},
@@ -1299,6 +1317,22 @@
   doi = {10.1016/S0065-2156(08)70100-5},
   isbn = {978-0-12-374579-8},
   langid = {english}
+}
+
+@incollection{burgers1948mathematicala,
+  title = {A {{Mathematical Model Illustrating}} the {{Theory}} of {{Turbulence}}},
+  booktitle = {Advances in {{Applied Mechanics}}},
+  author = {Burgers, J. M.},
+  editor = {Von Mises, Richard and Von K{\'a}rm{\'a}n, Theodore},
+  year = {1948},
+  month = jan,
+  volume = {1},
+  pages = {171--199},
+  publisher = {{Elsevier}},
+  doi = {10.1016/S0065-2156(08)70100-5},
+  abstract = {This chapter discusses that the application of methods of statistical analysis and statistical mechanics to the problem of turbulent fluid motion has attracted much attention in recent years. It investigated a complicated system of nonlinear equations, in order to find out enough about the properties of the solutions of these equations that insight can be obtained into the various patterns exhibited by the field and that data can be derived concerning the relative frequencies of these patterns in the hope that in this way a basis may be found for the calculation of important values. The difficulties encounter are of a twofold nature: in part they are connected with the complicated geometrical character of the hydrodynamical equations; in part they are dependent upon the presence of nonlinear terms, containing derivatives of the first order of the velocity components, along with derivatives of the second order multiplied by the very small coefficient of viscosity. The latter feature is responsible for a number of important, characteristics of turbulence, among which are prominent those connected with the balance of energy and with the appearance of dissipation layers. These layer an important part in the energy exchange, as they represent the main regions where energy is dissipated.},
+  langid = {english},
+  file = {/Users/connor/Zotero/storage/Z3IZW76I/Burgers - 1948 - A Mathematical Model Illustrating the Theory of Tu.pdf;/Users/connor/Zotero/storage/XUIXH77R/S0065215608701005.html}
 }
 
 @article{burgers1998analysis,
@@ -2532,7 +2566,6 @@
   primaryclass = {cs, math, stat},
   abstract = {Statistical learning additions to physically derived mathematical models are gaining traction in the literature. A recent approach has been to augment the underlying physics of the governing equations with data driven Bayesian statistical methodology. Coined statFEM, the method acknowledges a priori model misspecification, by embedding stochastic forcing within the governing equations. Upon receipt of additional data, the posterior distribution of the discretised finite element solution is updated using classical Bayesian filtering techniques. The resultant posterior jointly quantifies uncertainty associated with the ubiquitous problem of model misspecification and the data intended to represent the true process of interest. Despite this appeal, computational scalability is a challenge to statFEM's application to high-dimensional problems typically experienced in physical and industrial contexts. This article overcomes this hurdle by embedding a low-rank approximation of the underlying dense covariance matrix, obtained from the leading order modes of the full-rank alternative. Demonstrated on a series of reaction-diffusion problems of increasing dimension, using experimental and simulated data, the method reconstructs the sparsely observed data-generating processes with minimal loss of information, in both posterior mean and the variance, paving the way for further integration of physical and probabilistic approaches to complex systems.},
   archiveprefix = {arXiv},
-  copyright = {All rights reserved},
   keywords = {Mathematics - Numerical Analysis,Statistics - Machine Learning,Statistics - Methodology},
   file = {/Users/connor/Zotero/storage/25XIF93H/Duffin et al. - 2021 - Low-rank statistical finite elements for scalable .pdf;/Users/connor/Zotero/storage/BZ4XRYFG/2109.html}
 }
@@ -5532,6 +5565,24 @@
   file = {/Users/connor/Zotero/storage/FV2K45GF/Kovachki and Stuart - 2019 - Ensemble Kalman Inversion A Derivative-Free Techn.pdf}
 }
 
+@article{kutluay1999numerical,
+  title = {Numerical Solution of One-Dimensional {{Burgers}} Equation: Explicit and Exact-Explicit Finite Difference Methods},
+  shorttitle = {Numerical Solution of One-Dimensional {{Burgers}} Equation},
+  author = {Kutluay, S. and Bahadir, A. R. and {\"O}zde{\c s}, A.},
+  year = {1999},
+  month = mar,
+  journal = {Journal of Computational and Applied Mathematics},
+  volume = {103},
+  number = {2},
+  pages = {251--261},
+  issn = {0377-0427},
+  doi = {10.1016/S0377-0427(98)00261-1},
+  abstract = {This paper presents finite-difference solution and analytical solution of the finite-difference approximations based on the standard explicit method to the one-dimensional Burgers equation which arises frequently in the mathematical modelling used to solve problems in fluid dynamics. Results obtained by these ways for some modest values of viscosity have been compared with the exact (Fourier) one. It is shown that they are in good agreement with each other.},
+  langid = {english},
+  keywords = {Burgers equation,Exact-explicit finite difference,Explicit finite difference},
+  file = {/Users/connor/Zotero/storage/KTJT5NQQ/Kutluay et al. - 1999 - Numerical solution of one-dimensional Burgers equa.pdf;/Users/connor/Zotero/storage/CSI5CQ7N/S0377042798002611.html}
+}
+
 @article{kuttler1984eigenvalues,
   title = {Eigenvalues of the {{Laplacian}} in {{Two Dimensions}}},
   author = {Kuttler, J. R. and Sigillito, V. G.},
@@ -6865,6 +6916,23 @@
   abstract = {Operational forecasting is hampered both by the rapid divergence of nearby initial conditions and by error in the underlying model. Interest in chaos has fuelled much work on the first of these two issues; this paper focuses on the second. A new approach to quantifying state-dependent model error, the local model drift, is derived and deployed both in examples and in operational numerical weather prediction models. A simple law is derived to relate model error to likely shadowing performance (how long the model can stay close to the observations). Imperfect model experiments are used to contrast the performance of truncated models relative to a high resolution run, and the operational model relative to the analysis. In both cases the component of forecast error due to state-dependent model error tends to grow as the square-root of forecast time, and provides a major source of error out to three days. These initial results suggest that model error plays a major role and calls for further research in quantifying both the local model drift and expected shadowing times.},
   langid = {english},
   file = {/Users/connor/Zotero/storage/YLSNLRGS/Orrell et al. - 2001 - Model error in weather forecasting.pdf}
+}
+
+@article{orrell2001modela,
+  title = {Model Error in Weather Forecasting},
+  author = {Orrell, D. and Smith, L. and Barkmeijer, J. and Palmer, T. N.},
+  year = {2001},
+  month = dec,
+  journal = {Nonlinear Processes in Geophysics},
+  volume = {8},
+  number = {6},
+  pages = {357--371},
+  publisher = {{Copernicus GmbH}},
+  issn = {1023-5809},
+  doi = {10.5194/npg-8-357-2001},
+  abstract = {{$<$}p{$><$}strong class="journal-contentHeaderColor"{$>$}Abstract.{$<$}/strong{$>$} Operational forecasting is hampered both by the rapid divergence of nearby initial conditions and by error in the underlying model. Interest in chaos has fuelled much work on the first of these two issues; this paper focuses on the second. A new approach to quantifying state-dependent model error, the local model drift, is derived and deployed both in examples and in operational numerical weather prediction models. A simple law is derived to relate model error to likely shadowing performance (how long the model can stay close to the observations). Imperfect model experiments are used to contrast the performance of truncated models relative to a high resolution run, and the operational model relative to the analysis. In both cases the component of forecast error due to state-dependent model error tends to grow as the square-root of forecast time, and provides a major source of error out to three days. These initial results suggest that model error plays a major role and calls for further research in quantifying both the local model drift and expected shadowing times.{$<$}/p{$>$}},
+  langid = {english},
+  file = {/Users/connor/Zotero/storage/UJYD8VNV/Orrell et al. - 2001 - Model error in weather forecasting.pdf;/Users/connor/Zotero/storage/9L2DGCSH/2001.html}
 }
 
 @article{osborne1978influence,
@@ -8493,7 +8561,7 @@
   author = {Stan Development Team},
   year = {2021},
   abstract = {Stan user's guide with examples and programming techniques.},
-  file = {/Users/connor/Zotero/storage/RGNF3UQL/index.html}
+  file = {/Users/connor/Zotero/storage/YQZU43UP/stan-users-guide-2_28.pdf;/Users/connor/Zotero/storage/RGNF3UQL/index.html}
 }
 
 @article{stastna2002large,
