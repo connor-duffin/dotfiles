@@ -13,9 +13,9 @@ HISTSIZE=-1
 if [ $HOSTNAME == "csic40" ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/.miniconda3/lib"
 
-    # make sure single threads are used ONLY
-    export OPENBLAS_NUM_THREADS=1
-    export OMP_NUM_THREADS=1
+    # make sure threading is reasonable
+    export OPENBLAS_NUM_THREADS=15
+    export OMP_NUM_THREADS=15
 
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!

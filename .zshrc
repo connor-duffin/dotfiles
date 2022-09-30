@@ -66,7 +66,7 @@ ZSH_THEME="theunraveler"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  brew colorize colored-man-pages osx
+  brew colorize colored-man-pages macos
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -76,6 +76,7 @@ alias R="R --quiet --no-save"
 alias tmux="tmux -2"
 alias gppl="g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias cambox-notebook='ssh -NL localhost:1234:localhost:8888 cambox'
 
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
@@ -110,3 +111,6 @@ export PATH="/Users/connor/.scripts:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.2
