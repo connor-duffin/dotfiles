@@ -114,3 +114,5 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.1.2
+
+export BORG_PASSPHRASE=""
