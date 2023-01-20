@@ -5,6 +5,9 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+;; auto-balance parens
+(electric-pair-mode 1)
+
 ;; load theme and line numbers
 (load-theme 'gruvbox-light-hard t)
 (set-frame-font "Inconsolata 14" nil t)
@@ -44,7 +47,8 @@
 ;; projectile setup
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-project-search-path '(("Users/connor/Projects/" . 2)))
+(setq projectile-project-search-path '(("Users/connor/Documents/" . 2)
+				       ("/Users/connor/Projects/" . 4)))
 (helm-projectile-on)
 
 ;; python setup
@@ -64,6 +68,26 @@
 ;; LaTeX setup (with AUCTeX)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
+
+;; set the base directory
+(setq latex-base-directory "/Users/connor/Documents/LaTeX/")
+
+;; auto-insert from template
+(auto-insert-mode)
+(setq auto-insert-directory latex-base-directory)
+(setq auto-insert-query nil)
+(define-auto-insert "\.tex" "template.tex")
+(define-auto-insert "\.Rmd" "template.Rmd")
+
+;; pull in updates to macros and bibliography'
+(defun update-tex ()
+    (interactive)
+    (copy-file (concat latex-base-directory "macros.tex")
+		(concat (magit-toplevel) "macros.tex") t)
+
+    (copy-file (concat latex-base-directory "master.bib")
+		(concat (magit-toplevel) "bibliography.bib") t)
+    )
 
 ;; aesthetic changes
 (setq default-frame-alist '((width . 120) (height . 55)))
@@ -109,15 +133,15 @@
 
 ;; setup sync to remote
 (defun sync-remote ()
-    "Travel up the path until .sync is found, upon which, run .sync."
+    "Travel up the path until .sync.sh is found, upon which, run .sync."
     (interactive)
     (save-buffer)
     (with-temp-buffer
-	(while (and (not (file-exists-p ".sync"))
+	(while (and (not (file-exists-p ".sync.sh"))
 		    (not (equal "/" default-directory)))
 	(cd ".."))
-	(when (file-exists-p ".sync")
-	    (save-window-excursion (async-shell-command "./.sync")))))
+	(when (file-exists-p ".sync.sh")
+	    (save-window-excursion (async-shell-command "./.sync.sh")))))
 
 ;; sync to remote
 (global-set-key (kbd "C-$") 'sync-remote)
