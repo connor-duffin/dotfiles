@@ -8,6 +8,9 @@
 ;; auto-balance parens
 (electric-pair-mode 1)
 
+;; no highlighting of indentation
+(highlight-indentation-mode )
+
 ;; load theme and line numbers
 (load-theme 'gruvbox-light-hard t)
 (set-frame-font "Inconsolata 14" nil t)
@@ -51,10 +54,18 @@
 				       ("/Users/connor/Projects/" . 4)))
 (helm-projectile-on)
 
+;; setup flycheck
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode))
+
 ;; python setup
 (setenv "WORKON_HOME" "/Users/connor/miniconda3/envs")  ;; proper environments
 (elpy-enable)
 (setq elpy-rpc-virtualenv-path 'current)
+;; (when (load "flycheck" t t)
+;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; org mode enabled and set up
 (use-package org
@@ -153,9 +164,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("19a2c0b92a6aa1580f1be2deb7b8a8e3a4857b6c6ccf522d00547878837267e7" default))
+ '(elpy-modules
+   '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-folding elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
+   '(flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
