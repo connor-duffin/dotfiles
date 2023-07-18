@@ -8,6 +8,13 @@
 ;; auto-balance parens
 (electric-pair-mode 1)
 
+;; fill columns
+(setq-default fill-column 120)
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+
+;; (add-hook 'text-mode-hook #'auto-fill-mode)
+;; (add-hook 'prog-mode-hook #'auto-fill-mode)
+
 ;; no highlighting of indentation
 (highlight-indentation-mode )
 
@@ -138,7 +145,7 @@
 ;; setup to run external terminal from here
 (defun iterm-here ()
     (interactive)
-    (save-window-excursion (async-shell-command "open . -a terminal")))
+    (save-window-excursion (async-shell-command "open . -a kitty")))
 
 (global-set-key (kbd "C-\"") 'iterm-here)
 
@@ -168,7 +175,7 @@
    '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-folding elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
+   '(visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
