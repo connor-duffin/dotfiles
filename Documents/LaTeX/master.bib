@@ -2379,6 +2379,22 @@
   file = {/Users/connor/Zotero/storage/BH2EWW3G/S0021999114008456.html}
 }
 
+@article{chen2017simple,
+  title = {Simple Stochastic Dynamical Models Capturing the Statistical Diversity of {{El Ni\~no Southern Oscillation}}},
+  author = {Chen, Nan and Majda, Andrew J.},
+  year = {2017},
+  month = feb,
+  journal = {Proceedings of the National Academy of Sciences},
+  volume = {114},
+  number = {7},
+  pages = {1468--1473},
+  publisher = {{Proceedings of the National Academy of Sciences}},
+  doi = {10.1073/pnas.1620766114},
+  urldate = {2023-07-26},
+  abstract = {The El Ni\~no Southern Oscillation (ENSO) has significant impact on global climate and seasonal prediction. A simple modeling framework is developed here that automatically captures the statistical diversity of ENSO. First, a stochastic parameterization of the wind bursts including both westerly and easterly winds is coupled to a simple ocean\textendash atmosphere model that is otherwise deterministic, linear, and stable. Second, a simple nonlinear zonal advection with no ad hoc parameterization of the background sea-surface temperature (SST) gradient and a mean easterly trade wind anomaly representing the multidecadal acceleration of the trade wind are both incorporated into the coupled model that enables anomalous warm SST in the central Pacific. Then a three-state stochastic Markov jump process is used to drive the wind burst activity that depends on the strength of the western Pacific warm pool in a simple and effective fashion. It allows the coupled model to simulate the quasi-regular moderate traditional El Ni\~no, the super El Ni\~no, and the central Pacific (CP) El Ni\~no as well as the La Ni\~na with realistic features. In addition to the anomalous SST, the Walker circulation anomalies at different ENSO phases all resemble those in nature. In particular, the coupled model succeeds in reproducing the observed episode during the 1990s, where a series of 5-y CP El Ni\~nos is followed by a super El Ni\~no and then a La Ni\~na. Importantly, both the variance and the non-Gaussian statistical features in different Ni\~no regions spanning from the western to the eastern Pacific are captured by the coupled model.},
+  file = {/Users/connor/Zotero/storage/GWTXRIXI/Chen and Majda - 2017 - Simple stochastic dynamical models capturing the s.pdf}
+}
+
 @inproceedings{chen2018neural,
   title = {Neural {{Ordinary Differential Equations}}},
   booktitle = {Advances in {{Neural Information Processing Systems}}},
@@ -10015,6 +10031,13 @@
   file = {/Users/connor/Zotero/storage/FBTF8M2K/Marzouk et al. - 2007 - Stochastic spectral methods for efficient Bayesian.pdf;/Users/connor/Zotero/storage/CS68D9W7/S0021999106004839.html}
 }
 
+@misc{matrices,
+  title = {Matrices \textemdash{} {{PETSc}} 3.19.3 Documentation},
+  urldate = {2023-07-18},
+  howpublished = {https://petsc.org/release/manual/mat/\#dense-matrices},
+  file = {/Users/connor/Zotero/storage/2SQBMNLA/mat.html}
+}
+
 @misc{matrix,
   title = {The {{Matrix Cookbook}}},
   urldate = {2022-02-16},
@@ -12619,6 +12642,60 @@
   file = {/Users/connor/Zotero/storage/MCKQRTME/Schmid and Hunter - 2020 - Improving ERGM Starting Values Using Simulated Ann.pdf;/Users/connor/Zotero/storage/JDHYC2Q5/2009.html}
 }
 
+@misc{schmidt2023rankreduced,
+  title = {The {{Rank-Reduced Kalman Filter}}: {{Approximate Dynamical-Low-Rank Filtering In High Dimensions}}},
+  shorttitle = {The {{Rank-Reduced Kalman Filter}}},
+  author = {Schmidt, Jonathan and Hennig, Philipp and Nick, J{\"o}rg and Tronarp, Filip},
+  year = {2023},
+  month = jun,
+  number = {arXiv:2306.07774},
+  eprint = {2306.07774},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  doi = {10.48550/arXiv.2306.07774},
+  urldate = {2023-08-02},
+  abstract = {Inference and simulation in the context of high-dimensional dynamical systems remain computationally challenging problems. Some form of dimensionality reduction is required to make the problem tractable in general. In this paper, we propose a novel approximate Gaussian filtering and smoothing method which propagates low-rank approximations of the covariance matrices. This is accomplished by projecting the Lyapunov equations associated with the prediction step to a manifold of low-rank matrices, which are then solved by a recently developed, numerically stable, dynamical low-rank integrator. Meanwhile, the update steps are made tractable by noting that the covariance update only transforms the column space of the covariance matrix, which is low-rank by construction. The algorithm differentiates itself from existing ensemble-based approaches in that the low-rank approximations of the covariance matrices are deterministic, rather than stochastic. Crucially, this enables the method to reproduce the exact Kalman filter as the low-rank dimension approaches the true dimensionality of the problem. Our method reduces computational complexity from cubic (for the Kalman filter) to \textbackslash emph\{quadratic\} in the state-space size in the worst-case, and can achieve \textbackslash emph\{linear\} complexity if the state-space model satisfies certain criteria. Through a set of experiments in classical data-assimilation and spatio-temporal regression, we show that the proposed method consistently outperforms the ensemble-based methods in terms of error in the mean and covariance with respect to the exact Kalman filter. This comes at no additional cost in terms of asymptotic computational complexity.},
+  archiveprefix = {arxiv},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/connor/Zotero/storage/JRKP9Z9S/Schmidt et al. - 2023 - The Rank-Reduced Kalman Filter Approximate Dynami.pdf;/Users/connor/Zotero/storage/JRXCRQMM/2306.html}
+}
+
+@misc{schmidt2023rankreduceda,
+  title = {The {{Rank-Reduced Kalman Filter}}: {{Approximate Dynamical-Low-Rank Filtering In High Dimensions}}},
+  shorttitle = {The {{Rank-Reduced Kalman Filter}}},
+  author = {Schmidt, Jonathan and Hennig, Philipp and Nick, J{\"o}rg and Tronarp, Filip},
+  year = {2023},
+  month = jun,
+  number = {arXiv:2306.07774},
+  eprint = {2306.07774},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  urldate = {2023-08-02},
+  abstract = {Inference and simulation in the context of high-dimensional dynamical systems remain computationally challenging problems. Some form of dimensionality reduction is required to make the problem tractable in general. In this paper, we propose a novel approximate Gaussian filtering and smoothing method which propagates low-rank approximations of the covariance matrices. This is accomplished by projecting the Lyapunov equations associated with the prediction step to a manifold of low-rank matrices, which are then solved by a recently developed, numerically stable, dynamical low-rank integrator. Meanwhile, the update steps are made tractable by noting that the covariance update only transforms the column space of the covariance matrix, which is low-rank by construction. The algorithm differentiates itself from existing ensemble-based approaches in that the low-rank approximations of the covariance matrices are deterministic, rather than stochastic. Crucially, this enables the method to reproduce the exact Kalman filter as the lowrank dimension approaches the true dimensionality of the problem. Our method reduces computational complexity from cubic (for the Kalman filter) to quadratic in the state-space size in the worst-case, and can achieve linear complexity if the state-space model satisfies certain criteria. Through a set of experiments in classical data-assimilation and spatio-temporal regression, we show that the proposed method consistently outperforms the ensemble-based methods in terms of error in the mean and covariance with respect to the exact Kalman filter. This comes at no additional cost in terms of asymptotic computational complexity.},
+  archiveprefix = {arxiv},
+  langid = {english},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/connor/Zotero/storage/H3W66LCI/Schmidt et al. - 2023 - The Rank-Reduced Kalman Filter Approximate Dynami.pdf}
+}
+
+@misc{schmidt2023rankreducedb,
+  title = {The {{Rank-Reduced Kalman Filter}}: {{Approximate Dynamical-Low-Rank Filtering In High Dimensions}}},
+  shorttitle = {The {{Rank-Reduced Kalman Filter}}},
+  author = {Schmidt, Jonathan and Hennig, Philipp and Nick, J{\"o}rg and Tronarp, Filip},
+  year = {2023},
+  month = jun,
+  number = {arXiv:2306.07774},
+  eprint = {2306.07774},
+  primaryclass = {cs, stat},
+  publisher = {{arXiv}},
+  urldate = {2023-08-02},
+  abstract = {Inference and simulation in the context of high-dimensional dynamical systems remain computationally challenging problems. Some form of dimensionality reduction is required to make the problem tractable in general. In this paper, we propose a novel approximate Gaussian filtering and smoothing method which propagates low-rank approximations of the covariance matrices. This is accomplished by projecting the Lyapunov equations associated with the prediction step to a manifold of low-rank matrices, which are then solved by a recently developed, numerically stable, dynamical low-rank integrator. Meanwhile, the update steps are made tractable by noting that the covariance update only transforms the column space of the covariance matrix, which is low-rank by construction. The algorithm differentiates itself from existing ensemble-based approaches in that the low-rank approximations of the covariance matrices are deterministic, rather than stochastic. Crucially, this enables the method to reproduce the exact Kalman filter as the lowrank dimension approaches the true dimensionality of the problem. Our method reduces computational complexity from cubic (for the Kalman filter) to quadratic in the state-space size in the worst-case, and can achieve linear complexity if the state-space model satisfies certain criteria. Through a set of experiments in classical data-assimilation and spatio-temporal regression, we show that the proposed method consistently outperforms the ensemble-based methods in terms of error in the mean and covariance with respect to the exact Kalman filter. This comes at no additional cost in terms of asymptotic computational complexity.},
+  archiveprefix = {arxiv},
+  langid = {english},
+  keywords = {Computer Science - Machine Learning,Statistics - Machine Learning},
+  file = {/Users/connor/Zotero/storage/GIYMFJ2T/Schmidt et al. - 2023 - The Rank-Reduced Kalman Filter Approximate Dynami.pdf}
+}
+
 @article{schulte2012multilanguage,
   title = {A {{Multi-Language Computing Environment}} for {{Literate Programming}} and {{Reproducible Research}}},
   author = {Schulte, Eric and Davison, Dan and Dye, Thomas and Dominik, Carsten},
@@ -13845,6 +13922,30 @@
   pages = {5},
   langid = {english},
   file = {/Users/connor/Zotero/storage/ILHU68BA/The Three Sigma Rule.pdf}
+}
+
+@article{thual2016simple,
+  title = {Simple Stochastic Model for {{El Ni\~no}} with Westerly Wind Bursts},
+  author = {Thual, Sulian and Majda, Andrew J. and Chen, Nan and Stechmann, Samuel N.},
+  year = {2016},
+  month = sep,
+  journal = {Proceedings of the National Academy of Sciences},
+  volume = {113},
+  number = {37},
+  pages = {10245--10250},
+  publisher = {{Proceedings of the National Academy of Sciences}},
+  doi = {10.1073/pnas.1612002113},
+  urldate = {2023-07-26},
+  abstract = {Atmospheric wind bursts in the tropics play a key role in the dynamics of the El Ni\~no Southern Oscillation (ENSO). A simple modeling framework is proposed that summarizes this relationship and captures major features of the observational record while remaining physically consistent and amenable to detailed analysis. Within this simple framework, wind burst activity evolves according to a stochastic two-state Markov switching\textendash diffusion process that depends on the strength of the western Pacific warm pool, and is coupled to simple ocean\textendash atmosphere processes that are otherwise deterministic, stable, and linear. A simple model with this parameterization and no additional nonlinearities reproduces a realistic ENSO cycle with intermittent El Ni\~no and La Ni\~na events of varying intensity and strength as well as realistic buildup and shutdown of wind burst activity in the western Pacific. The wind burst activity has a direct causal effect on the ENSO variability: in particular, it intermittently triggers regular El Ni\~no or La Ni\~na events, super El Ni\~no events, or no events at all, which enables the model to capture observed ENSO statistics such as the probability density function and power spectrum of eastern Pacific sea surface temperatures. The present framework provides further theoretical and practical insight on the relationship between wind burst activity and the ENSO.},
+  file = {/Users/connor/Zotero/storage/94FJQF68/Thual et al. - 2016 - Simple stochastic model for El Niño with westerly .pdf}
+}
+
+@misc{thual2019,
+  title = {Thual2019\_{{Article}}\_{{StatisticalOccurrenceAndMechan}}.Pdf},
+  journal = {Google Docs},
+  urldate = {2023-07-26},
+  howpublished = {https://drive.google.com/file/d/1fdEEEJ\_ucLezet7cayh5geWXbTv-UYEB/view?usp=embed\_facebook},
+  file = {/Users/connor/Zotero/storage/HHTQZB75/view.html}
 }
 
 @article{thuburn2013computational,

@@ -19,7 +19,8 @@
 (highlight-indentation-mode )
 
 ;; load theme and line numbers
-(load-theme 'gruvbox-light-hard t)
+;; (load-theme 'gruvbox-light-hard t)
+(require 'color-theme-sanityinc-tomorrow)
 (set-frame-font "Inconsolata 14" nil t)
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
@@ -145,7 +146,7 @@
 ;; setup to run external terminal from here
 (defun iterm-here ()
     (interactive)
-    (save-window-excursion (async-shell-command "open . -a kitty")))
+    (save-window-excursion (async-shell-command "open . -a Terminal")))
 
 (global-set-key (kbd "C-\"") 'iterm-here)
 
@@ -169,13 +170,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(sanityinc-tomorrow-day))
  '(custom-safe-themes
-   '("19a2c0b92a6aa1580f1be2deb7b8a8e3a4857b6c6ccf522d00547878837267e7" default))
+   '("bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "19a2c0b92a6aa1580f1be2deb7b8a8e3a4857b6c6ccf522d00547878837267e7" default))
  '(elpy-modules
    '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-folding elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
  '(helm-minibuffer-history-key "M-p")
+ '(org-agenda-files
+   '("~/Documents/Org/daily.org" "/Users/connor/Documents/Org/research.org"))
  '(package-selected-packages
-   '(visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
+   '(color-theme color-theme-sanityinc-tomorrow visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

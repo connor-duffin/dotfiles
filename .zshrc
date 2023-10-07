@@ -76,7 +76,6 @@ alias R="R --quiet --no-save"
 alias tmux="tmux -2"
 alias gppl="g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias cambox-notebook='ssh -NL localhost:1234:localhost:8888 cambox'
 
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
@@ -116,3 +115,9 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.1.2
 
 export BORG_PASSPHRASE=""
+
+# Created by `pipx` on 2023-09-13 09:15:38
+export PATH="$PATH:/Users/connor/.local/bin"
+
+# added in for PostgreSQL support
+export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
