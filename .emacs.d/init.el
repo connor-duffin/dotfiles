@@ -11,17 +11,10 @@
 ;; fill columns
 (setq-default fill-column 120)
 (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-
-;; (add-hook 'text-mode-hook #'auto-fill-mode)
-;; (add-hook 'prog-mode-hook #'auto-fill-mode)
-
-;; no highlighting of indentation
-(highlight-indentation-mode )
+(global-display-fill-column-indicator-mode)
 
 ;; load theme and line numbers
-;; (load-theme 'gruvbox-light-hard t)
 (require 'color-theme-sanityinc-tomorrow)
-(set-frame-font "Inconsolata 14" nil t)
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 
@@ -36,31 +29,34 @@
 
 ;; evil mode setup
 (use-package evil
+  :ensure t
   :init
-    (setq evil-want-C-u-scroll t)
-    (setq evil-undo-system 'undo-redo)
-    (setq evil-want-keybinding nil)
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-undo-system 'undo-redo)
+  (setq evil-want-keybinding nil)
   :config
-    (when (require 'evil-collection nil t)
-    (evil-collection-init))
-    (evil-mode 1))
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 ;; evil-surround setup
 (use-package evil-surround
   :config
-  (global-evil-surround-mode 1))
-
-;; helm basic config
-(use-package helm-config
-  :config
-    (helm-mode 1))
+  (global-evil-surround-mode 1)
+  :ensure t)
 
 ;; projectile setup
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-project-search-path '(("Users/connor/Documents/" . 2)
-				       ("/Users/connor/Projects/" . 4)))
-(helm-projectile-on)
+(setq projectile-project-search-path '(("home/connor/Documents/" . 2)
+				       ("/home/connor/Projects/" . 4)))
+;; (helm-projectile-on)
 
 ;; setup flycheck
 ;; (use-package flycheck
@@ -68,7 +64,7 @@
 ;;   :init (global-flycheck-mode))
 
 ;; python setup
-(setenv "WORKON_HOME" "/Users/connor/miniconda3/envs")  ;; proper environments
+(setenv "WORKON_HOME" "/home/connor/miniconda3/envs")  ;; proper environments
 (elpy-enable)
 (setq elpy-rpc-virtualenv-path 'current)
 ;; (when (load "flycheck" t t)
@@ -89,7 +85,7 @@
 (setq TeX-parse-self t)
 
 ;; set the base directory
-(setq latex-base-directory "/Users/connor/Documents/LaTeX/")
+(setq latex-base-directory "/home/connor/Documents/LaTeX/")
 
 ;; auto-insert from template
 (auto-insert-mode)
@@ -108,56 +104,21 @@
 		(concat (magit-toplevel) "bibliography.bib") t)
     )
 
-;; aesthetic changes
-(setq default-frame-alist '((width . 120) (height . 55)))
-
-(defun smallframe ()
-    (interactive)
-    (set-frame-size (selected-frame) 120 55)
-    (set-frame-position (selected-frame) 890 55)
-    ;; (set-frame-position (selected-frame) 900 50)
-)
-
-(defun bigframe ()
-    (interactive)
-    (set-frame-position (selected-frame) 200 55)
-    (set-frame-size (selected-frame) 200 55)
-    ;; (set-frame-position (selected-frame) 200 50)
-)
-
-(defun smallframe-laptop ()
-    (interactive)
-    (set-frame-size (selected-frame) 120 55)
-    (set-frame-position (selected-frame) 675 50)
-)
-
-(defun bigframe-laptop ()
-    (interactive)
-    (set-frame-size (selected-frame) 195 55)
-    (set-frame-position (selected-frame) 75 50)
-)
-
-(global-set-key (kbd "C-{") 'smallframe)
-(global-set-key (kbd "C-}") 'bigframe)
-
-(global-set-key (kbd "C-M-{") 'smallframe-laptop)
-(global-set-key (kbd "C-M-}") 'bigframe-laptop)
-
 ;; setup to run external terminal from here
 (defun iterm-here ()
     (interactive)
-    (save-window-excursion (async-shell-command "open . -a Terminal")))
+    (save-window-excursion (async-shell-command "kitty")))
 
 (global-set-key (kbd "C-\"") 'iterm-here)
 
 ;; setup sync to remote
 (defun sync-remote ()
-    "Travel up the path until .sync.sh is found, upon which, run .sync."
-    (interactive)
-    (save-buffer)
-    (with-temp-buffer
+  "Travel up the path until .sync.sh is found, upon which, run .sync."
+  (interactive)
+  (save-buffer)
+  (with-temp-buffer
 	(while (and (not (file-exists-p ".sync.sh"))
-		    (not (equal "/" default-directory)))
+		      (not (equal "/" default-directory)))
 	(cd ".."))
 	(when (file-exists-p ".sync.sh")
 	    (save-window-excursion (async-shell-command "./.sync.sh")))))
@@ -177,9 +138,9 @@
    '(elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-folding elpy-module-pyvenv elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
  '(helm-minibuffer-history-key "M-p")
  '(org-agenda-files
-   '("~/Documents/Org/daily.org" "/Users/connor/Documents/Org/research.org"))
+   '("~/Documents/Org/daily.org" "/home/connor/Documents/Org/research.org"))
  '(package-selected-packages
-   '(color-theme color-theme-sanityinc-tomorrow visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
+   '(elpygen color-theme color-theme-sanityinc-tomorrow visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
