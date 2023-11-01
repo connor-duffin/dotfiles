@@ -56,7 +56,7 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-project-search-path '(("home/connor/Documents/" . 2)
 				       ("/home/connor/Projects/" . 4)))
-;; (helm-projectile-on)
+(helm-projectile-on)
 
 ;; setup flycheck
 ;; (use-package flycheck
@@ -65,11 +65,10 @@
 
 ;; python setup
 (setenv "WORKON_HOME" "/home/connor/miniconda3/envs")  ;; proper environments
-(elpy-enable)
-(setq elpy-rpc-virtualenv-path 'current)
-;; (when (load "flycheck" t t)
-;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
 
 ;; org mode enabled and set up
 (use-package org
@@ -126,6 +125,18 @@
 ;; sync to remote
 (global-set-key (kbd "C-$") 'sync-remote)
 
+;; startup time
+(defun efs/display-startup-time ()
+  (message
+   "Emacs loaded in %s with %d garbage collections."
+   (format
+    "%.2f seconds"
+    (float-time
+     (time-subtract after-init-time before-init-time)))
+   gcs-done))
+
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,7 +151,7 @@
  '(org-agenda-files
    '("~/Documents/Org/daily.org" "/home/connor/Documents/Org/research.org"))
  '(package-selected-packages
-   '(elpygen color-theme color-theme-sanityinc-tomorrow visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
+   '(helm-projectile elpygen color-theme color-theme-sanityinc-tomorrow visual-fill-column flycheck origami jupyter auctex use-package elpy evil-collection magit helm gruvbox-theme projectile evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
