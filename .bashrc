@@ -5,7 +5,7 @@ alias R='R --quiet --no-save'
 alias wttr='curl wttr.in'
 export VISUAL='vim'
 
-PS1=" \[\033[01;34m\]\w\[\033[00m\] >> "
+PS1=" [\h] \[\033[01;34m\]\w\[\033[00m\] >> "
 
 HISTSIZE=-1
 
