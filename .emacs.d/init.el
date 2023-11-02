@@ -5,18 +5,17 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+;; but do display relative linenums
+(global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
+
 ;; auto-balance parens
 (electric-pair-mode 1)
 
 ;; fill columns
 (setq-default fill-column 120)
-(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
 (global-display-fill-column-indicator-mode)
-
-;; load theme and line numbers
-(require 'color-theme-sanityinc-tomorrow)
-(global-display-line-numbers-mode)
-(setq display-line-numbers-type 'relative)
+(set-frame-font "DejaVu Sans Mono 9" nil t)
 
 ;; melpa setup
 (require 'package)
@@ -27,7 +26,18 @@
 (eval-when-compile
   (require 'use-package))
 
-;; evil mode setup
+(use-package visual-fill-column
+  :ensure t
+  :init
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode))
+
+;; load theme and line numbers
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :init
+  (require 'color-theme-sanityinc-tomorrow))
+
+;; evil mode stuff
 (use-package evil
   :ensure t
   :init
@@ -45,18 +55,26 @@
   :config
   (evil-collection-init))
 
-;; evil-surround setup
 (use-package evil-surround
+  :ensure t
   :config
-  (global-evil-surround-mode 1)
-  :ensure t)
+  (global-evil-surround-mode 1))
 
 ;; projectile setup
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(setq projectile-project-search-path '(("home/connor/Documents/" . 2)
-				       ("/home/connor/Projects/" . 4)))
-(helm-projectile-on)
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-project-search-path '(("home/connor/Documents/" . 2)
+					 ("/home/connor/Projects/" . 4))))
+
+;; and helm
+(use-package helm
+  :ensure t
+  :init
+  (helm-projectile-on))
 
 ;; setup flycheck
 ;; (use-package flycheck
@@ -73,11 +91,11 @@
 ;; org mode enabled and set up
 (use-package org
   :config
-    ;; org-babel languages
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . t)
-       (python . t))))
+  ;; org-babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t))))
 
 ;; LaTeX setup (with AUCTeX)
 (setq TeX-auto-save t)
@@ -106,7 +124,7 @@
 ;; setup to run external terminal from here
 (defun iterm-here ()
     (interactive)
-    (save-window-excursion (async-shell-command "kitty")))
+    (save-window-excursion (async-shell-command "kitty &")))
 
 (global-set-key (kbd "C-\"") 'iterm-here)
 
