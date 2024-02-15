@@ -3,11 +3,13 @@ alias ls='ls --color=auto'
 alias my_scrot='scrot ~/Pictures/%Y-%m-%d-%H%M%s.png'
 alias R='R --quiet --no-save'
 alias wttr='curl wttr.in'
-export VISUAL='vim'
 
-PS1=" [\h] \[\033[01;34m\]\w\[\033[00m\] >> "
+export VISUAL='vim'
+export WINIT_X11_SCALE_FACTOR=1
 
 HISTSIZE=-1
+PS1=" [\h] \[\033[01;34m\]\w\[\033[00m\] >> "
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -24,5 +26,12 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# personal scripts
+export PATH="/home/connor/.scripts:$PATH"
+
 # set the config alias for dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# disable multithreading by default
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
