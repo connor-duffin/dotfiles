@@ -4,6 +4,7 @@ options(repos = r)
 rm(r)
 
 options(
+  warnPartialMatchDollar = TRUE,
   stringsAsFactors = FALSE,
   prompt = "R > ",
   width = 120
