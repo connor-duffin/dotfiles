@@ -3,3 +3,5 @@
 	email = connor.p.duffin@gmail.com
 [status]
 	showUntrackedFiles = normal
+[credential]
+	helper = store
