@@ -1,0 +1,20 @@
+import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
+
+[font]
+size = 9
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
