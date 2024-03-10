@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/connor/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -65,9 +65,7 @@ ZSH_THEME="theunraveler"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  brew colorize colored-man-pages macos
-)
+plugins=(colorize colored-man-pages git pass ubuntu)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -83,7 +81,8 @@ SAVEHIST=$HISTSIZE
 export VISUAL=vi
 export EDITOR=vi
 
-export WORKON_HOME="/Users/connor/.miniconda3/envs"
+export WORKON_HOME="/home/connor/.miniconda3/envs"
+export BORG_PASSPHRASE=""
 
 # vi mode
 bindkey -v
@@ -92,32 +91,21 @@ bindkey "^?" backward-delete-char
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/connor/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/connor/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/connor/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/connor/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/connor/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/connor/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/connor/miniconda3/bin:$PATH"
+        export PATH="/home/connor/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# path updates
-export PATH="/Users/connor/.scripts:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.1.2
-
-export BORG_PASSPHRASE=""
-
-# Created by `pipx` on 2023-09-13 09:15:38
-export PATH="$PATH:/Users/connor/.local/bin"
-
-# added in for PostgreSQL support
-export PATH="/usr/local/opt/postgresql@15/bin:$PATH"
+# misc settings
+export PATH="/home/connor/.scripts/:$PATH"
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export WINIT_X11_SCALE_FACTOR=1
