@@ -1,5 +1,5 @@
-;; don't show the splash screen
-(setq inhibit-startup-message t)
+;; backups: who needs em
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
 ;; don't display the tool/scroll bars
 (tool-bar-mode -1)

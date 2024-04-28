@@ -1,7 +1,7 @@
 import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
 
 [font]
-size = 9
+size = 8
 
 [font.bold]
 family = "monospace"

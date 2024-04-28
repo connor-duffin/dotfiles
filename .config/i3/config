@@ -188,3 +188,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# Inner/outer gaps
+gaps inner 10
+gaps outer 20
+
+# Load the background
+exec fehbg &

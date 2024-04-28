@@ -15,7 +15,7 @@ font:
     family: monospace
     style: Bold Italic
 
-  size: 9
+  size: 8
 
 import:
    - ~/.config/alacritty/themes/themes/tomorrow_night.yaml
