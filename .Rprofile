@@ -7,8 +7,9 @@ options(
   warnPartialMatchDollar = TRUE,
   stringsAsFactors = FALSE,
   prompt = "R > ",
-  width = 120
+  width = 120,
+  browserNLdisabled = TRUE
 )
-options(warnPartialMatchDollar = TRUE)
 
 clear <- function() {system("clear")}
+
