@@ -334,6 +334,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   This is the place where most of your configurations should be done. Unless it is
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
+  ;; fill columns
+  (setq-default fill-column 120)
+  (global-display-fill-column-indicator-mode)
+
   ;; proper environments
   (setenv "WORKON_HOME" "/home/connor/miniconda3/envs")
 
