@@ -334,13 +334,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
   This is the place where most of your configurations should be done. Unless it is
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
-  ;; projectile directory
-
   ;; proper environments
   (setenv "WORKON_HOME" "/home/connor/miniconda3/envs")
 
   ;; latex stuff
-  (setq latex-base-directory "/home/connor/Documents/LaTeX/")
+  (setq latex-base-directory "/home/connor/.LaTeX/")
 
   ;; auto-insert from template
   (auto-insert-mode)
@@ -365,15 +363,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; org stuff
   (with-eval-after-load 'org
-    ;; here goes your Org config :)
-    (setq org-agenda-files '("~/Documents/Org/research.org"
-                             "~/Documents/Org/meetings.org"
-                             "~/Documents/Org/life.org"
-                             "~/Documents/Org/life.org_archive"))
-    (setq org-agenda-entry-text-mode 't)
-    (setq org-agenda-entry-text-maxlines 40)
-    (setq org-agenda-start-on-weekday 0)
-
     ;; org-babel indents are OK
     (setq org-src-preserve-indentation t)
     (setq org-edit-src-content-indentation 0)
@@ -383,30 +372,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;; latex previews in org-mode
     (setq org-latex-create-formula-image-program 'imagemagick)
-
-    ;; habit-tracking
-    (add-to-list 'org-modules 'org-habit t)
-    ;; (setq org-habit-show-all-today t)
-
-    ;; org-babel languages
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((emacs-lisp . t)
-       (julia . t)
-       (python . t)
-       (jupyter . t)))
     )
-
-  ;; use ranger as fm
-  (setq ranger-show-preview t
-        ranger-enter-with-minus 'ranger
-        ranger-width-preview 0.25
-        ranger-width-parents 0.25
-        ranger-cleanup-on-disable t)
 
   ;; aesthetics
   (setq c-basic-offset 4)
-  (setq dotspacemacs-mode-line-theme '(all-the-icons :separator nil))
 
   ;; python flychecking
   (setq flycheck-python-flake8-executable "flake8")
@@ -431,35 +400,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; use inline images with emacs-ipython notebook
   (setq ein:output-area-inlined-images t)
 
-  ;; create a project directory
-  ;; automatically initializes git repo, and includes a .sync script
-  (defun setup-syncdir ()
-    (interactive)
-    (setq project-dir (read-directory-name "New project directory: "))
-    (setq remote-dir (concat
-                      "cambox:projects/"
-                      (file-name-nondirectory (directory-file-name project-dir)) "/"))
-
-    ;; (mkdir project-dir)
-    ;; (magit-init project-dir)
-
-    ;; create rsync command
-    (setq rsync
-          (mapconcat 'identity
-                     (list "rsync -av --progress"
-                           "--exclude .git"
-                           "--exclude .DS_Store"
-                           project-dir
-                           remote-dir)
-                     " ")
-          )
-
-    ;; copy rsync command to file .sync
-    (setq syncfile (concat project-dir ".sync"))
-    (write-region rsync nil syncfile)
-    (set-file-modes syncfile #o755)
-    )
-
+  ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
   )
 ;; Do not write anything past this comment. This is where Emacs will
