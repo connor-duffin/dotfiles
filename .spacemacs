@@ -335,7 +335,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   explicitly specified that a variable should be set before a package is loaded,
   you should place your code here."
   ;; fill columns
-  (setq-default fill-column 120)
+  (setq-default fill-column 80)
   (global-display-fill-column-indicator-mode)
 
   ;; proper environments
