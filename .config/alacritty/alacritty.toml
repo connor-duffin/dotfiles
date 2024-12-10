@@ -1,20 +1,21 @@
+[general]
 import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
 
 [font]
-size = 8
+size = 12
 
 [font.bold]
-family = "monospace"
+family = "Source Code Pro"
 style = "Bold"
 
 [font.bold_italic]
-family = "monospace"
+family = "Source Code Pro"
 style = "Bold Italic"
 
 [font.italic]
-family = "monospace"
+family = "Source Code Pro"
 style = "Italic"
 
 [font.normal]
-family = "monospace"
+family = "Source Code Pro"
 style = "Regular"
