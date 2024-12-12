@@ -2,20 +2,20 @@
 import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
 
 [font]
-size = 12
+size = 14
 
 [font.bold]
-family = "Source Code Pro"
+family = "Menlo"
 style = "Bold"
 
 [font.bold_italic]
-family = "Source Code Pro"
+family = "Menlo"
 style = "Bold Italic"
 
 [font.italic]
-family = "Source Code Pro"
+family = "Menlo"
 style = "Italic"
 
 [font.normal]
-family = "Source Code Pro"
+family = "Menlo"
 style = "Regular"
