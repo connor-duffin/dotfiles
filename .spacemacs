@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      (conda :variables conda-anaconda-home "~/miniconda3")
      scheme
      ;; others
-     helm
+     ivy
      git
      markdown
      org
@@ -69,8 +69,6 @@ This function should only modify configuration layer settings."
      (spacemacs-layouts :variables
                         spacemacs-layouts-restrict-spc-tab t
                         persp-autokill-buffer-on-remove 'kill-weak)
-     ;; fun
-     emoji
      )
 
 
@@ -82,7 +80,11 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '((copilot :location (recipe
+                         :fetcher github
+                         :repo "copilot-emacs/copilot.el"
+                         :files ("*.el"))))
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -269,7 +271,7 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("DejaVu Sans Mono"
+   dotspacemacs-default-font '("Menlo"
                                :size 12.0
                                :weight normal
                                :width normal)
@@ -611,6 +613,14 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; set the initial frame size
+  (setq initial-frame-alist
+        (append initial-frame-alist
+                '((left   . 200)
+                  (top    . 100)
+                  (width  . 220)
+                  (height . 70))))
+
   ;; fill columns
   (setq-default fill-column 80)
   (global-display-fill-column-indicator-mode)
@@ -678,15 +688,24 @@ before packages are loaded."
   ;; sync to remote
   (global-set-key (kbd "C-$") 'sync-remote)
 
-  ;; use inline images with emacs-ipython notebook
-  (setq ein:output-area-inlined-images t)
-
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
 
+  ;; hard set the node.js executable
+  (setq copilot-node-executable "/opt/homebrew/opt/node@22/bin/node")
+
+  ;; accept completion from copilot and fallback to company (copied from GH)
   (with-eval-after-load 'company
     ;; disable inline previews
     (delq 'company-preview-if-just-one-frontend company-frontends))
+
+  (with-eval-after-load 'copilot
+    (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+    (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+    (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+    (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
+
+  (add-hook 'prog-mode-hook 'copilot-mode)
   )
 
 
