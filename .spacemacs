@@ -688,6 +688,13 @@ before packages are loaded."
   ;; sync to remote
   (global-set-key (kbd "C-$") 'sync-remote)
 
+  ;; create a block of pomodoro checkboxes for the current day
+  (defun insert-workblocks () (interactive)
+         (insert "- [ ] work blocks [/]\n  - [ ] pomodoro 1\n  - [ ] pomodoro 2\n  - [ ] pomodoro 3")
+         )
+  (global-set-key (kbd "C-:") 'insert-workblocks)
+
+
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
 
