@@ -2,7 +2,7 @@
 import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
 
 [font]
-size = 14
+size = 12
 
 [font.bold]
 family = "Menlo"
