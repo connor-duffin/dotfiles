@@ -694,25 +694,27 @@ before packages are loaded."
          )
   (global-set-key (kbd "C-:") 'insert-workblocks)
 
-
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
 
-  ;; hard set the node.js executable
-  (setq copilot-node-executable "/opt/homebrew/opt/node@22/bin/node")
+  (when (eq (system-name) 'NHLRX7K2M439.local)
+    (message "This code is running on my work laptop")
+    ;; hard set the node.js executable
+    (setq copilot-node-executable "/opt/homebrew/opt/node@22/bin/node")
 
-  ;; accept completion from copilot and fallback to company (copied from GH)
-  (with-eval-after-load 'company
-    ;; disable inline previews
-    (delq 'company-preview-if-just-one-frontend company-frontends))
+    ;; accept completion from copilot and fallback to company (copied from GH)
+    (with-eval-after-load 'company
+      ;; disable inline previews
+      (delq 'company-preview-if-just-one-frontend company-frontends))
 
-  (with-eval-after-load 'copilot
-    (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-    (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-    (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
-    (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
+    (with-eval-after-load 'copilot
+      (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+      (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+      (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+      (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
 
-  (add-hook 'prog-mode-hook 'copilot-mode)
+    (add-hook 'prog-mode-hook 'copilot-mode)
+    )
   )
 
 
