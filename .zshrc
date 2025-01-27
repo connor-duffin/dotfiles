@@ -20,7 +20,6 @@ source $ZSH/oh-my-zsh.sh
 alias R="R --quiet --no-save"
 alias tmux="tmux -2"
 alias gppl="g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werrors -std=c++20"
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
@@ -38,12 +37,6 @@ bindkey "^?" backward-delete-char
 export OMP_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export WINIT_X11_SCALE_FACTOR=1
-
-# set the config alias for dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
-# add in homebrew to path (whilst we have no sudo privileges)
-export PATH="/Users/connd/homebrew/bin:$PATH"
 
 # for accessing NCBI API
 export ENTREZ_KEY=fd33508667f5fe584678103dbffcdafbe008
