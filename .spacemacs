@@ -697,7 +697,7 @@ before packages are loaded."
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
 
-  (when (eq (system-name) 'NHLRX7K2M439.local)
+  (when (string= (system-name) "NHLRX7K2M439.local")
     (message "This code is running on my work laptop")
     ;; hard set the node.js executable
     (setq copilot-node-executable "/opt/homebrew/opt/node@22/bin/node")
