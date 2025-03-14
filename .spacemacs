@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      (conda :variables conda-anaconda-home "~/miniconda3")
      scheme
      ;; others
-     ivy
+     helm
      git
      markdown
      org
@@ -80,11 +80,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages
-   '((copilot :location (recipe
-                         :fetcher github
-                         :repo "copilot-emacs/copilot.el"
-                         :files ("*.el"))))
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -249,8 +245,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(dracula)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -652,6 +647,9 @@ before packages are loaded."
   (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
+  ;; load in quarto
+  (require 'quarto-mode)
+
   ;; org stuff
   (with-eval-after-load 'org
     ;; org-babel indents are OK
@@ -696,25 +694,6 @@ before packages are loaded."
 
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
-
-  (when (string= (system-name) "NHLRX7K2M439.local")
-    (message "This code is running on my work laptop")
-    ;; hard set the node.js executable
-    (setq copilot-node-executable "/opt/homebrew/opt/node@22/bin/node")
-
-    ;; accept completion from copilot and fallback to company (copied from GH)
-    (with-eval-after-load 'company
-      ;; disable inline previews
-      (delq 'company-preview-if-just-one-frontend company-frontends))
-
-    (with-eval-after-load 'copilot
-      (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-      (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-      (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
-      (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
-
-    (add-hook 'prog-mode-hook 'copilot-mode)
-    )
   )
 
 
@@ -722,16 +701,18 @@ before packages are loaded."
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
-  This is an auto-generated function, do not modify its content directly, use
-  Emacs customize menu instead.
-  This function is called at the very end of Spacemacs initialization."
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(custom-safe-themes
+     '("fbf73690320aa26f8daffdd1210ef234ed1b0c59f3d001f342b9c0bbf49f531c" default))
    '(package-selected-packages
-     '(multi-vterm mustang-theme naquadah-theme noctilux-theme nodejs-repl npm-mode obsidian-theme occidental-theme oldlace-theme omtose-phellack-themes org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank organic-green-theme orgit-forge orgit forge yaml ghub closql emacsql treepy org phoenix-dark-mono-theme phoenix-dark-pink-theme pip-requirements pipenv load-env-vars pippel planet-theme poetry prettier-js professional-theme pug-mode purple-haze-theme py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv railscasts-theme rake ranger rbenv rebecca-theme reverse-theme robe inf-ruby ron-mode rspec-mode rtags rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rustic xterm-color markdown-mode rust-mode xref rvm sass-mode haml-mode scss-mode seeing-is-believing seti-theme shell-pop skewer-mode js2-mode simple-httpd slim-mode smeargle smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme sphinx-doc subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tagedit tango-2-theme tango-plus-theme tangotango-theme tao-theme terminal-here toml-mode toxi-theme treemacs-magit magit with-editor transient magit-section twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme vimrc-mode vterm web-beautify web-mode white-sand-theme yaml-mode yapfify yasnippet-snippets yasnippet ycmd request-deferred deferred zen-and-art-theme zenburn-theme ws-butler writeroom-mode winum which-key wgrep vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(quarto-mode flyspell-correct-helm helm-c-yasnippet helm-company helm-css-scss helm-git-grep helm-ls-git helm-lsp helm-org-rifle helm-pydoc helm-rtags helm wfnames helm-core dracula-theme modus-themes multi-vterm mustang-theme naquadah-theme noctilux-theme nodejs-repl npm-mode obsidian-theme occidental-theme oldlace-theme omtose-phellack-themes org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank organic-green-theme orgit-forge orgit forge yaml ghub closql emacsql treepy org phoenix-dark-mono-theme phoenix-dark-pink-theme pip-requirements pipenv load-env-vars pippel planet-theme poetry prettier-js professional-theme pug-mode purple-haze-theme py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv railscasts-theme rake ranger rbenv rebecca-theme reverse-theme robe inf-ruby ron-mode rspec-mode rtags rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rustic xterm-color markdown-mode rust-mode xref rvm sass-mode haml-mode scss-mode seeing-is-believing seti-theme shell-pop skewer-mode js2-mode simple-httpd slim-mode smeargle smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme sphinx-doc subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tagedit tango-2-theme tango-plus-theme tangotango-theme tao-theme terminal-here toml-mode toxi-theme treemacs-magit magit with-editor transient magit-section twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme vimrc-mode vterm web-beautify web-mode white-sand-theme yaml-mode yapfify yasnippet-snippets yasnippet ycmd request-deferred deferred zen-and-art-theme zenburn-theme ws-butler writeroom-mode winum which-key wgrep vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
