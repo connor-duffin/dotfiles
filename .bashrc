@@ -9,3 +9,5 @@ HISTSIZE=-1
 
 # set the config alias for dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+. "$HOME/.local/bin/env"
