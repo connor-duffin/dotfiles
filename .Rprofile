@@ -8,7 +8,8 @@ options(
   stringsAsFactors = FALSE,
   prompt = "R > ",
   width = 120,
-  browserNLdisabled = TRUE
+  browserNLdisabled = TRUE,
+  lintr.linter_file = "~/.lintr"
 )
 
 clear <- function() {system("clear")}
