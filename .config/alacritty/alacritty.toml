@@ -1,21 +1,21 @@
 [general]
-import = ["/home/connor/.config/alacritty/themes/themes/tomorrow_night.toml"]
+import = ["/home/connor/.config/alacritty/themes/dracula.toml"]
 
 [font]
-size = 12
+size = 11
 
 [font.bold]
-family = "Menlo"
+family = "Inconsolata"
 style = "Bold"
 
 [font.bold_italic]
-family = "Menlo"
+family = "Inconsolata"
 style = "Bold Italic"
 
 [font.italic]
-family = "Menlo"
+family = "Inconsolata"
 style = "Italic"
 
 [font.normal]
-family = "Menlo"
+family = "Inconsolata"
 style = "Regular"
