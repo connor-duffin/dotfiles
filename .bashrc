@@ -7,7 +7,8 @@ PS1=" [\h] \[\033[01;34m\]\w\[\033[00m\] >> "
 
 HISTSIZE=-1
 
-# set the config alias for dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
-. "$HOME/.local/bin/env"
+# mac-specific settings
+system_type=$(uname -s)
+if [ "$system_type" = "Darwin" ]; then
+  . "$HOME/.local/bin/env"
+fi
