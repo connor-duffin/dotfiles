@@ -41,4 +41,7 @@ export WINIT_X11_SCALE_FACTOR=1
 # for accessing NCBI API
 export ENTREZ_KEY=fd33508667f5fe584678103dbffcdafbe008
 
+# for R
 . "$HOME/.local/bin/env"
+
+export PATH=$HOME/bin:$PATH

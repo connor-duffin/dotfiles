@@ -54,7 +54,7 @@ This function should only modify configuration layer settings."
      (conda :variables conda-anaconda-home "~/miniconda3")
      scheme
      ;; others
-     helm
+     ivy
      git
      markdown
      org
