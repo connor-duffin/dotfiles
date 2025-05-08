@@ -44,4 +44,6 @@ export ENTREZ_KEY=fd33508667f5fe584678103dbffcdafbe008
 # for R
 . "$HOME/.local/bin/env"
 
+# set up the $PATH for homebrew
 export PATH=$HOME/bin:$PATH
+export PATH="/opt/homebrew/sbin:$PATH"
