@@ -32,17 +32,13 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(rust
-     ruby
-     html
-     javascript
+   '(html
      csv
      vimscript
      yaml
      emacs-lisp
      ess
      latex
-     julia
      ipython-notebook
      (c-c++ :variables
             c-c++-backend 'lsp-clangd)
@@ -56,6 +52,7 @@ This function should only modify configuration layer settings."
      ;; others
      ivy
      git
+     treemacs
      markdown
      org
      ranger
@@ -66,11 +63,7 @@ This function should only modify configuration layer settings."
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
      auto-completion
-     (spacemacs-layouts :variables
-                        spacemacs-layouts-restrict-spc-tab t
-                        persp-autokill-buffer-on-remove 'kill-weak)
      )
-
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -105,29 +98,6 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; If non-nil then enable support for the portable dumper. You'll need to
-   ;; compile Emacs 27 from source following the instructions in file
-   ;; EXPERIMENTAL.org at to root of the git repository.
-   ;;
-   ;; WARNING: pdumper does not work with Native Compilation, so it's disabled
-   ;; regardless of the following setting when native compilation is in effect.
-   ;;
-   ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper nil
-
-   ;; Name of executable file pointing to emacs 27+. This executable must be
-   ;; in your PATH.
-   ;; (default "emacs")
-   dotspacemacs-emacs-pdumper-executable-file "emacs"
-
-   ;; Name of the Spacemacs dump file. This is the file will be created by the
-   ;; portable dumper in the cache directory under dumps sub-directory.
-   ;; To load it when starting Emacs add the parameter `--dump-file'
-   ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
-   ;; (default (format "spacemacs-%s.pdmp" emacs-version))
-   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
-
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
@@ -218,7 +188,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
 
    ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
-   ;; This has no effect in terminal or if "all-the-icons" package or the font
+   ;; This has no effect in terminal or if "nerd-icons" package or the font
    ;; is not installed. (default nil)
    dotspacemacs-startup-buffer-show-icons nil
 
@@ -244,7 +214,10 @@ It should only modify the values of Spacemacs settings."
 
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
-   ;; with 2 themes variants, one dark and one light)
+   ;; with 2 themes variants, one dark and one light). A theme from external
+   ;; package can be defined with `:package', or a theme can be defined with
+   ;; `:location' to download the theme package, refer the themes section in
+   ;; DOCUMENTATION.org for the full theme specifications.
    dotspacemacs-themes '(dracula)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -254,7 +227,6 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
    dotspacemacs-mode-line-theme '(vanilla)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
@@ -294,10 +266,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-major-mode-leader-key ","
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
-   ;; (default "C-M-m" for terminal mode, "<M-return>" for GUI mode).
+   ;; (default "C-M-m" for terminal mode, "M-<return>" for GUI mode).
    ;; Thus M-RET should work as leader key in both GUI and terminal modes.
    ;; C-M-m also should work in terminal mode, but not in GUI mode.
-   dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
+   dotspacemacs-major-mode-emacs-leader-key (if window-system "M-<return>" "C-M-m")
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -394,7 +366,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default t) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
@@ -443,7 +415,7 @@ It should only modify the values of Spacemacs settings."
    ;; but only visual lines are counted. For example, folded lines will not be
    ;; counted and wrapped lines are counted as multiple lines.
    ;; This variable can also be set to a property list for finer control:
-   ;; '(:relative t
+   ;; '(:relative nil
    ;;   :visual nil
    ;;   :disabled-for-modes dired-mode
    ;;                       doc-view-mode
@@ -454,7 +426,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative t)
+   dotspacemacs-line-numbers nil
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -597,15 +569,6 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   )
 
-
-(defun dotspacemacs/user-load ()
-  "Library to load while dumping.
-This function is called only while dumping Spacemacs configuration. You can
-`require' or `load' the libraries of your choice that will be included in the
-dump."
-  )
-
-
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
@@ -703,24 +666,3 @@ before packages are loaded."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(custom-safe-themes
-     '("fbf73690320aa26f8daffdd1210ef234ed1b0c59f3d001f342b9c0bbf49f531c" default))
-   '(package-selected-packages
-     '(cmake-mode helm-ctest quarto-mode flyspell-correct-helm helm-c-yasnippet helm-company helm-css-scss helm-git-grep helm-ls-git helm-lsp helm-org-rifle helm-pydoc helm-rtags helm wfnames helm-core dracula-theme modus-themes multi-vterm mustang-theme naquadah-theme noctilux-theme nodejs-repl npm-mode obsidian-theme occidental-theme oldlace-theme omtose-phellack-themes org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank organic-green-theme orgit-forge orgit forge yaml ghub closql emacsql treepy org phoenix-dark-mono-theme phoenix-dark-pink-theme pip-requirements pipenv load-env-vars pippel planet-theme poetry prettier-js professional-theme pug-mode purple-haze-theme py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv railscasts-theme rake ranger rbenv rebecca-theme reverse-theme robe inf-ruby ron-mode rspec-mode rtags rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rustic xterm-color markdown-mode rust-mode xref rvm sass-mode haml-mode scss-mode seeing-is-believing seti-theme shell-pop skewer-mode js2-mode simple-httpd slim-mode smeargle smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme sphinx-doc subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tagedit tango-2-theme tango-plus-theme tangotango-theme tao-theme terminal-here toml-mode toxi-theme treemacs-magit magit with-editor transient magit-section twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme vimrc-mode vterm web-beautify web-mode white-sand-theme yaml-mode yapfify yasnippet-snippets yasnippet ycmd request-deferred deferred zen-and-art-theme zenburn-theme ws-butler writeroom-mode winum which-key wgrep vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
