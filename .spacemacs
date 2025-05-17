@@ -32,7 +32,9 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   '(javascript
+     json
+     html
      csv
      vimscript
      yaml
@@ -54,7 +56,8 @@ This function should only modify configuration layer settings."
      git
      treemacs
      markdown
-     org
+     (org :variables
+          org-todo-dependencies-strategy 'naive-auto)
      ranger
      (shell :variables
             shell-default-height 30
@@ -610,13 +613,6 @@ before packages are loaded."
                (concat (magit-toplevel) "bibliography.bib") t)
     )
 
-  ;; rmd stuff
-  (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-
-  ;; load in quarto
-  (require 'quarto-mode)
-
   ;; org stuff
   (with-eval-after-load 'org
     ;; org-babel indents are OK
@@ -628,6 +624,14 @@ before packages are loaded."
 
     ;; latex previews in org-mode
     (setq org-latex-create-formula-image-program 'imagemagick)
+
+    ;; set the org-agenda files
+    (setq org-agenda-files '("~/Documents/Org/work.org"
+                             "~/Documents/Org/computing.org"))
+
+    ;; TODO -> PROG -> DONE
+    (setq org-todo-keywords
+          '((sequence "TODO" "PROG" "|" "DONE")))
     )
 
   ;; aesthetics
@@ -648,16 +652,12 @@ before packages are loaded."
         (cd ".."))
       (when (file-exists-p ".sync")
         (save-window-excursion (async-shell-command "./.sync"))
-        )))
+        )
+      )
+    )
 
   ;; sync to remote
   (global-set-key (kbd "C-$") 'sync-remote)
-
-  ;; create a block of pomodoro checkboxes for the current day
-  (defun insert-workblocks () (interactive)
-         (insert "- [ ] work blocks [/]\n  - [ ] pomodoro 1\n  - [ ] pomodoro 2\n  - [ ] pomodoro 3")
-         )
-  (global-set-key (kbd "C-:") 'insert-workblocks)
 
   ;; evil copy to x clipboard settings
   (fset 'evil-visual-update-x-selection 'ignore)
