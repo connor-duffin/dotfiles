@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
      auto-completion
+     github-copilot
      )
 
    ;; List of additional packages that will be installed without being wrapped
@@ -627,7 +628,7 @@ before packages are loaded."
 
     ;; set the org-agenda files
     (setq org-agenda-files '("~/Documents/Org/work.org"
-                             "~/Documents/Org/computing.org"))
+                             "~/Documents/Org/life.org"))
 
     ;; TODO -> PROG -> DONE
     (setq org-todo-keywords
