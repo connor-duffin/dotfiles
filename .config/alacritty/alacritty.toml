@@ -19,3 +19,6 @@ style = "Italic"
 [font.normal]
 family = "Inconsolata"
 style = "Regular"
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1"
