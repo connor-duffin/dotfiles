@@ -12,7 +12,13 @@ ZSH_THEME="theunraveler"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colorize colored-man-pages git pass ubuntu)
+system_name=$(uname -s)
+
+if [[ "$system_name" == "Darwin" ]]; then
+  plugins=(colorize colored-man-pages git pass macos)
+else
+  plugins=(colorize colored-man-pages git pass debian)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -41,9 +47,11 @@ export WINIT_X11_SCALE_FACTOR=1
 # for accessing NCBI API
 export ENTREZ_KEY=fd33508667f5fe584678103dbffcdafbe008
 
-# for R
-. "$HOME/.local/bin/env"
+if [[ "$system_name" == "Darwin" ]]; then
+  # for R
+  . "$HOME/.local/bin/env"
 
-# set up the $PATH for homebrew
-export PATH=$HOME/bin:$PATH
-export PATH="/opt/homebrew/sbin:$PATH"
+  # set up the $PATH for homebrew
+  export PATH=$HOME/bin:$PATH
+  export PATH="/opt/homebrew/sbin:$PATH"
+fi
