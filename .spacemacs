@@ -46,7 +46,7 @@ This function should only modify configuration layer settings."
             c-c++-backend 'lsp-clangd)
      cmake
      (python :variables
-             python-backend 'anaconda
+             python-backend 'lsp-pylsp
              python-test-runner 'pytest
              python-formatter 'yapf)
      (conda :variables conda-anaconda-home "~/miniconda3")
@@ -66,7 +66,6 @@ This function should only modify configuration layer settings."
      (spell-checking :variables spell-checking-enable-by-default nil)
      syntax-checking
      auto-completion
-     github-copilot
      )
 
    ;; List of additional packages that will be installed without being wrapped
@@ -242,7 +241,11 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '(("Menlo"
+   dotspacemacs-default-font '(("Fira Code"
+                                :size 10.0
+                                :weight medium
+                                :width normal)
+                               ("Menlo"
                                 :size 12.0
                                 :weight normal
                                 :width normal)
