@@ -1,5 +1,5 @@
 [general]
-import = ["/home/connor/.config/alacritty/themes/dracula.toml"]
+import = ["/home/connor/.config/alacritty/themes/github-light.toml"]
 
 [font]
 size = 10
