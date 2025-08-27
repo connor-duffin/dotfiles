@@ -19,7 +19,6 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(setq inhibit-startup-screen t)
 (global-display-fill-column-indicator-mode)
 (setq-default fill-column 80)
 (setq c-basic-offset 4)
@@ -32,7 +31,7 @@
 (setq org-todo-keywords '((sequence "TODO" "PROG" "|" "DONE")))
 
 ;; Font (adjust as needed)
-(set-frame-font "Menlo-12" nil t)
+(set-frame-font "Fira Code Medium 10" nil t)
 
 ;; Environment variables
 (setenv "WORKON_HOME" "~/miniconda3/envs")
@@ -151,16 +150,6 @@
 ;; Misc
 (setq-default show-trailing-whitespace t)
 
-;; End of file
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(provide 'init)
+;;; init.el ends here
+
