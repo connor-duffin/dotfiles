@@ -16,11 +16,6 @@ set laststatus=2
 set statusline+=%F
 set clipboard=unnamed
 
-" colors
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'medium'
-set background=dark
-
 " hotkeys
 map <C-n> :NERDTreeToggle<CR>
 nnoremap j gj
