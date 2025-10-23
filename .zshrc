@@ -30,8 +30,8 @@ alias gppl="g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werro
 HISTSIZE=100000000
 SAVEHIST=$HISTSIZE
 
-export VISUAL=vi
-export EDITOR=vi
+export VISUAL=nvim
+export EDITOR=nvim
 export BORG_PASSPHRASE=""
 
 # vi mode
