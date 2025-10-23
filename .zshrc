@@ -54,4 +54,7 @@ if [[ "$system_name" == "Darwin" ]]; then
   # set up the $PATH for homebrew
   export PATH=$HOME/bin:$PATH
   export PATH="/opt/homebrew/sbin:$PATH"
+
+  # set AWS region for work
+  export AWS_DEFAULT_REGION="eu-west-2"
 fi
