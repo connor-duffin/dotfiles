@@ -135,6 +135,12 @@ require('lazy').setup({
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
+  -- Pretty flexoki theme
+  { 'kepano/flexoki-neovim', name = 'flexoki',
+    config = function()
+      vim.cmd.colorscheme('flexoki')
+    end
+  },
   -- Web icons for pretty printing
   { "nvim-tree/nvim-web-devicons", opts = {} },
   -- Python syntax highlighting
