@@ -12,8 +12,6 @@ vim.opt.colorcolumn = "80"
 -- Grep program (consider switching to ripgrep later)
 vim.opt.grepprg = "grep -nH $*"
 
--- LaTeX flavor
-vim.g.tex_flavor = "latex"
 
 -- Disable folding
 vim.opt.foldenable = false
@@ -85,7 +83,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "lua", "python", "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv", "bash", "latex", "cpp" },
+        ensure_installed = { "lua", "python", "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv", "bash", "cpp" },
         highlight = { enable = true },
         indent = { enable = true },
       }
@@ -151,16 +149,3 @@ require('lazy').setup({
 
 -- Python syntax plugin configuration
 vim.g.python_highlight_all = 1
-
--- =========================================
--- Optional extras (commented out)
--- =========================================
--- vim.opt.completeopt = { "menuone", "noselect" }
-
--- Use ripgrep if available
--- if vim.fn.executable('rg') == 1 then
---   vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
--- end
-
--- Persistent undo (recommended)
--- vim.opt.undofile = true
