@@ -12,8 +12,6 @@ vim.opt.colorcolumn = "80"
 -- Grep program (consider switching to ripgrep later)
 vim.opt.grepprg = "grep -nH $*"
 
--- LaTeX flavor
-vim.g.tex_flavor = "latex"
 
 -- Disable folding
 vim.opt.foldenable = false
@@ -85,7 +83,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { "lua", "python", "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv", "bash", "latex", "cpp" },
+        ensure_installed = { "lua", "python", "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv", "bash", "cpp" },
         highlight = { enable = true },
         indent = { enable = true },
       }
@@ -114,6 +112,7 @@ require('lazy').setup({
   -- Nvim tree (file tree explorer/browser)
   {
     'nvim-tree/nvim-tree.lua',
+    tag = 'compat-nvim-0.9',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('nvim-tree').setup()
@@ -138,13 +137,6 @@ require('lazy').setup({
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
-  },
-  -- Pretty flexoki theme
-  { 'Mofiqul/dracula.nvim',
-    name = 'dracula',
-    config = function()
-      vim.cmd.colorscheme('dracula')
-    end
   },
   -- Web icons for pretty printing
   { "nvim-tree/nvim-web-devicons", opts = {} },
