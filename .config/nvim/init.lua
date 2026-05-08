@@ -91,6 +91,10 @@ require('lazy').setup({
       }
     end
   },
+  -- Copilot
+  { 
+    "github/copilot.vim"
+  },
   -- R setup
   {
     "R-nvim/R.nvim",
@@ -136,31 +140,31 @@ require('lazy').setup({
     },
   },
   -- Pretty flexoki theme
-  { 'kepano/flexoki-neovim', name = 'flexoki',
+  { 'Mofiqul/dracula.nvim',
+    name = 'dracula',
     config = function()
-      vim.cmd.colorscheme('flexoki')
+      vim.cmd.colorscheme('dracula')
     end
   },
   -- Web icons for pretty printing
   { "nvim-tree/nvim-web-devicons", opts = {} },
   -- Python syntax highlighting
   { 'vim-python/python-syntax' },
-  -- Github Copilot
-  { 'github/copilot.vim' }
+  -- Quarto plugin
+  {
+    "quarto-dev/quarto-nvim",
+    dependencies = {
+      "jmbuhr/otter.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  }
 })
 
 -- Python syntax plugin configuration
 vim.g.python_highlight_all = 1
 
--- =========================================
--- Optional extras (commented out)
--- =========================================
--- vim.opt.completeopt = { "menuone", "noselect" }
+-- Persistent undo
+vim.opt.undofile = true
 
--- Use ripgrep if available
--- if vim.fn.executable('rg') == 1 then
---   vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
--- end
-
--- Persistent undo (recommended)
--- vim.opt.undofile = true
+-- Clipboard support
+vim.opt.clipboard = "unnamedplus"
