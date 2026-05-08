@@ -108,6 +108,7 @@ require('lazy').setup({
   -- Nvim tree (file tree explorer/browser)
   {
     'nvim-tree/nvim-tree.lua',
+    tag = 'compat-nvim-0.9',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('nvim-tree').setup()
@@ -132,12 +133,6 @@ require('lazy').setup({
       { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
-  },
-  -- Pretty flexoki theme
-  { 'kepano/flexoki-neovim', name = 'flexoki',
-    config = function()
-      vim.cmd.colorscheme('flexoki')
-    end
   },
   -- Web icons for pretty printing
   { "nvim-tree/nvim-web-devicons", opts = {} },
