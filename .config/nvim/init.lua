@@ -99,16 +99,6 @@ require('lazy').setup({
      -- Only required if you also set defaults.lazy = true
     lazy = false
   },
-  {
-    "R-nvim/cmp-r",
-    {
-        "hrsh7th/nvim-cmp",
-        config = function()
-            require("cmp").setup({ sources = {{ name = "cmp_r" }}})
-            require("cmp_r").setup({})
-        end,
-    },
-  },
   -- Nvim tree (file tree explorer/browser)
   {
     'nvim-tree/nvim-tree.lua',
@@ -138,8 +128,6 @@ require('lazy').setup({
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
-  -- Web icons for pretty printing
-  { "nvim-tree/nvim-web-devicons", opts = {} },
   -- Python syntax highlighting
   { 'vim-python/python-syntax' },
   -- Quarto plugin
