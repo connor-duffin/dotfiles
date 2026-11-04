@@ -48,9 +48,6 @@ export WINIT_X11_SCALE_FACTOR=1
 export ENTREZ_KEY=fd33508667f5fe584678103dbffcdafbe008
 
 if [[ "$system_name" == "Darwin" ]]; then
-  # for R
-  . "$HOME/.local/bin/env"
-
   # set up the $PATH for homebrew
   export PATH=$HOME/bin:$PATH
   export PATH="/opt/homebrew/sbin:$PATH"
@@ -58,3 +55,5 @@ if [[ "$system_name" == "Darwin" ]]; then
   # set AWS region for work
   export AWS_DEFAULT_REGION="eu-west-2"
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
