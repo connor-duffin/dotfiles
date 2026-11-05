@@ -1,0 +1,22 @@
+{
+    "workbench.colorTheme": "GitHub Light",
+    "editor.fontFamily": "Inconsolata Nerd Font, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "workbench.startupEditor": "none",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.external.osxExec": "iTerm2.app",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.shellIntegration.history": 1000,
+    "terminal.integrated.persistentSessionScrollback": 10000,
+    "terminal.integrated.scrollback": 100000,
+    "git.autofetch": true,
+    // air format on R save
+    "[r]": {
+        "editor.formatOnSave": true
+    },
+    // Soft-wrap long lines visually at column 80
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    // Show a vertical guide at column 80
+    "editor.rulers": [80]
+}
