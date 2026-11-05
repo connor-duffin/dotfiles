@@ -9,10 +9,6 @@ vim.cmd('syntax on')
 -- Color column at 80
 vim.opt.colorcolumn = "80"
 
--- Grep program (consider switching to ripgrep later)
-vim.opt.grepprg = "grep -nH $*"
-
-
 -- Disable folding
 vim.opt.foldenable = false
 
@@ -28,10 +24,11 @@ vim.opt.expandtab = true
 -- vim.opt.smartindent = false
 -- vim.opt.cindent = false
 
--- GUI options (mostly relevant only in GUI clients; ignored in terminal)
-vim.cmd('set guioptions-=m')
-vim.cmd('set guioptions-=T')
-vim.cmd('set guioptions-=r')
+-- Persistent undo
+vim.opt.undofile = true
+
+-- Clipboard support
+vim.opt.clipboard = "unnamedplus"
 
 -- =========================================
 -- Keymaps
@@ -39,31 +36,18 @@ vim.cmd('set guioptions-=r')
 local map = vim.keymap.set
 local silent = { silent = true }
 
--- NERDTree toggle (if still using NERDTree)
-map('n', '<C-n>', ':NERDTreeToggle<CR>', silent)
-
 -- Movement through wrapped lines
-map('n', 'j', 'gj', { noremap = true })
-map('n', 'k', 'gk', { noremap = true })
-
--- Tab navigation
-map('n', 'L', 'gt', { noremap = true })
-map('n', 'H', 'gT', { noremap = true })
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
 -- Force quit
 map('n', '<C-q>', ':q!<CR>', silent)
 
--- Window navigation
-map('n', '<C-j>', '<C-W><C-j>', { noremap = true })
-map('n', '<C-k>', '<C-W><C-k>', { noremap = true })
-map('n', '<C-l>', '<C-W><C-l>', { noremap = true })
-map('n', '<C-h>', '<C-W><C-h>', { noremap = true })
-
--- =========================================
--- Plugin Management (lazy.nvim example)
--- =========================================
+-- =============================
+-- Plugin Management (lazy.nvim)
+-- =============================
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.notify("Installing lazy.nvim...", vim.log.levels.INFO)
   vim.fn.system({
     "git", "clone", "--filter=blob:none",
@@ -75,34 +59,9 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require('lazy').setup({
-  -- Treesitter for syntax parsing
-  {
-    'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
-    lazy = false,
-    build = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        ensure_installed = { "lua", "python", "markdown", "markdown_inline", "r", "rnoweb", "yaml", "csv", "bash", "cpp" },
-        highlight = { enable = true },
-        indent = { enable = true },
-      }
-    end
-  },
-  -- Copilot
-  { 
-    "github/copilot.vim"
-  },
-  -- R setup
-  {
-    "R-nvim/R.nvim",
-     -- Only required if you also set defaults.lazy = true
-    lazy = false
-  },
   -- Nvim tree (file tree explorer/browser)
   {
     'nvim-tree/nvim-tree.lua',
-    tag = 'compat-nvim-0.9',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('nvim-tree').setup()
@@ -129,22 +88,11 @@ require('lazy').setup({
     },
   },
   -- Python syntax highlighting
-  { 'vim-python/python-syntax' },
-  -- Quarto plugin
-  {
-    "quarto-dev/quarto-nvim",
-    dependencies = {
-      "jmbuhr/otter.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  }
+  { 'vim-python/python-syntax' }
 })
 
 -- Python syntax plugin configuration
 vim.g.python_highlight_all = 1
 
--- Persistent undo
-vim.opt.undofile = true
-
--- Clipboard support
-vim.opt.clipboard = "unnamedplus"
+-- Don't line up function arguments under the opening bracket
+vim.g.r_indent_align_args = 0
