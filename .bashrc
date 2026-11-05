@@ -13,3 +13,5 @@ system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
   . "$HOME/.local/bin/env"
 fi
+
+. "$HOME/.local/bin/rigenv"
